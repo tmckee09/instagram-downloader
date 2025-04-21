@@ -44,7 +44,16 @@
         body: JSON.stringify({ url: $refs.urlInput.value })
       })
       .then(res => res.json())
-      .then(data => { result = data; loading = false; error = ''; })
+      .then(data => {
+  if (data.error || !data.download_url) {
+    error = data.message || 'Invalid media URL';
+    result = null;
+  } else {
+    result = data;
+    error = '';
+  }
+  loading = false;
+})
       .catch(() => { error = 'Failed to fetch media.'; loading = false; })"
     >
       Download
