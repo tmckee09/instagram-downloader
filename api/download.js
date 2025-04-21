@@ -9,37 +9,32 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch('https://saveig.app/api/ajaxSearch/index', {
+      method: 'POST',
       headers: {
-        'User-Agent': 'Mozilla/5.0',
-        'Accept-Language': 'en-US,en;q=0.9',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
+      body: new URLSearchParams({ q: url }),
     });
 
-    const html = await response.text();
+    const data = await response.json();
 
-    // Match Open Graph video and image
-    const ogVideoMatch = html.match(/<meta property="og:video" content="(.*?)"/);
-    const ogImageMatch = html.match(/<meta property="og:image" content="(.*?)"/);
-
-    const videoUrl = ogVideoMatch ? ogVideoMatch[1] : null;
-    const thumbnail = ogImageMatch ? ogImageMatch[1] : null;
-
-    if (!videoUrl && !thumbnail) {
+    if (!data || !data.data || !data.data.length) {
       return res.status(404).json({
         error: true,
-        message: 'No media found at this URL',
+        message: 'No downloadable media found',
         thumbnail: null,
         download_url: null
       });
     }
 
-    res.status(200).json({
-      thumbnail,
-      download_url: videoUrl || thumbnail
+    const file = data.data[0]; // First file (usually the main video/image)
+    return res.status(200).json({
+      thumbnail: file.thumb || null,
+      download_url: file.url || null,
     });
   } catch (err) {
-    console.error('Scraper error:', err);
-    res.status(500).json({ message: 'Failed to fetch Instagram post' });
+    console.error('Parser API error:', err);
+    res.status(500).json({ message: 'Failed to fetch download data' });
   }
 }
