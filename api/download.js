@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'User-Agent': 'Mozilla/5.0',
         'Accept-Language': 'en-US,en;q=0.9',
       }
     });
@@ -21,6 +21,8 @@ export default async function handler(req, res) {
 
     const videoMatch = html.match(/"video_url":"(.*?)"/);
     const imageMatch = html.match(/"display_url":"(.*?)"/);
+
+    console.log({ videoMatch, imageMatch }); // <- Add this
 
     const videoUrl = videoMatch ? decodeURIComponent(videoMatch[1]) : null;
     const thumbnail = imageMatch ? decodeURIComponent(imageMatch[1]) : null;
@@ -34,7 +36,7 @@ export default async function handler(req, res) {
       download_url: videoUrl || thumbnail
     });
   } catch (err) {
-    console.error(err);
+    console.error("Error fetching Instagram post:", err);
     res.status(500).json({ message: 'Failed to fetch Instagram post' });
   }
 }
