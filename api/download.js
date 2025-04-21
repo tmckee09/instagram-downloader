@@ -9,17 +9,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch('https://saveig.app/api/ajaxSearch/index', {
+    const response = await fetch('https://igram.io/i/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams({ q: url }),
+      body: new URLSearchParams({ url }),
     });
 
-    const data = await response.json();
+    const html = await response.text();
 
-    if (!data || !data.data || !data.data.length) {
+    // Try to find video or image URL from the HTML (fallback basic match)
+    const videoMatch = html.match(/href="(https:\/\/[^"]+\.mp4)"/);
+    const imageMatch = html.match(/href="(https:\/\/[^"]+\.jpg)"/);
+
+    const downloadUrl = videoMatch?.[1] || imageMatch?.[1];
+    if (!downloadUrl) {
       return res.status(404).json({
         error: true,
         message: 'No downloadable media found',
@@ -28,13 +33,13 @@ export default async function handler(req, res) {
       });
     }
 
-    const file = data.data[0]; // First file (usually the main video/image)
-    return res.status(200).json({
-      thumbnail: file.thumb || null,
-      download_url: file.url || null,
+    res.status(200).json({
+      thumbnail: null, // could improve this later
+      download_url: downloadUrl,
     });
   } catch (err) {
-    console.error('Parser API error:', err);
+    console.error('Backup IG fetch failed:', err);
     res.status(500).json({ message: 'Failed to fetch download data' });
   }
 }
+
