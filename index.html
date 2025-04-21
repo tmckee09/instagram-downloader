@@ -65,18 +65,21 @@
       <div class="mt-4 text-red-500 text-sm text-center" x-text="error"></div>
     </template>
 
-    <template x-if="result">
-      <div class="mt-6 text-center">
-        <img :src="result.thumbnail" alt="Instagram post preview" class="rounded mb-3 w-full max-h-64 object-cover">
-        <a 
-          :href="result.download_url" 
-          target="_blank" 
-          class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
-        >
-          Download Media
-        </a>
-      </div>
+    <template x-if="result && result.download_url">
+  <div class="mt-6 text-center">
+    <template x-if="result.thumbnail">
+      <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover">
     </template>
+    <a 
+      :href="result.download_url" 
+      target="_blank" 
+      class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
+    >
+      Download Media
+    </a>
+  </div>
+</template>
+
 
     <p class="mt-8 text-xs text-center text-gray-400">
       Only public Instagram content is supported. Private or restricted posts cannot be downloaded.
