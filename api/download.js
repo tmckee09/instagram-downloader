@@ -30,22 +30,34 @@ export default async function handler(req, res) {
       });
     }
 
-    // Validate MIME type (make sure it's an image or video)
-    const headResponse = await fetch(file.url, { method: 'HEAD' });
-    const contentType = headResponse.headers.get('content-type');
-
-    if (!contentType || (!contentType.includes('image') && !contentType.includes('video'))) {
+    // ✅ Validate main download URL
+    const headRes = await fetch(file.url, { method: 'HEAD' });
+    const type = headRes.headers.get('content-type');
+    if (!type || (!type.includes('image') && !type.includes('video'))) {
       return res.status(415).json({
         error: true,
-        message: 'File is not a valid media type',
-        content_type: contentType,
+        message: 'Download URL is not a valid media file',
         thumbnail: null,
         download_url: null
       });
     }
 
+    // ✅ Validate thumbnail (if present)
+    let thumbnail = null;
+    if (file.thumbnail) {
+      try {
+        const thumbRes = await fetch(file.thumbnail, { method: 'HEAD' });
+        const thumbType = thumbRes.headers.get('content-type');
+        if (thumbType && thumbType.includes('image')) {
+          thumbnail = file.thumbnail;
+        }
+      } catch (err) {
+        console.warn('Thumbnail validation failed:', err);
+      }
+    }
+
     return res.status(200).json({
-      thumbnail: file.thumbnail || null,
+      thumbnail,
       download_url: file.url
     });
   } catch (err) {
@@ -53,3 +65,4 @@ export default async function handler(req, res) {
     res.status(500).json({ message: 'Failed to fetch download data' });
   }
 }
+
