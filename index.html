@@ -34,9 +34,9 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Hero Section with Instagram Gradient -->
+  <!-- Hero Section -->
   <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] py-20 px-6 text-white shadow-xl fade-in">
-    <div class="w-full max-w-xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
+    <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
       <h1 class="text-4xl font-extrabold mb-4 leading-tight">
         <span class="text-white drop-shadow-sm">Instagram</span>
         <span class="text-yellow-300 drop-shadow-sm">Video Downloader</span>
@@ -46,8 +46,8 @@
         <span class="block text-white/80 text-sm mt-1">No Watermarks. No Login Required.</span>
       </p>
 
-      <!-- Form Container with Border and Shadow -->
-      <div class="mt-8 bg-white/70 backdrop-blur-md rounded-xl shadow-xl px-6 py-6 w-full max-w-2xl mx-auto border border-white/50">
+      <!-- Input Form Glass Box -->
+      <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
         <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
           loading = true;
           fetch('/api/download', {
@@ -60,13 +60,11 @@
             result = data;
             loading = false;
             error = '';
-
             fetch('/api/track', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
             });
-
             if (data.download_url) {
               const link = document.createElement('a');
               link.href = data.download_url;
@@ -89,7 +87,7 @@
             />
             <button 
               type="button"
-              class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition flex items-center gap-2"
+              class="bg-white/80 text-gray-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white transition flex items-center gap-2"
               @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
               📋 Paste
             </button>
@@ -100,6 +98,8 @@
             Download
           </button>
         </form>
+
+        <!-- Status -->
         <div class="mt-4 text-sm text-white/90" x-show="loading">Grabbing download link...</div>
         <template x-if="error">
           <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
@@ -123,60 +123,60 @@
       </div>
     </div>
   </section>
-
+  <!-- Divider -->
   <div class="w-full h-4 bg-gradient-to-r from-pink-300 via-yellow-300 to-orange-400"></div>
 
-  <section class="py-24 px-6 text-center fade-in">
+  <!-- How It Works -->
+  <section class="py-24 px-6 text-center fade-in bg-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold mb-6">How It Works</h2>
+      <h2 class="text-3xl font-bold mb-6 text-gray-800">How It Works</h2>
       <div class="grid md:grid-cols-3 gap-10">
-        <div class="shadow-lg p-6 rounded-xl bg-white">
+        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
           <div class="text-5xl mb-4">📋</div>
           <h3 class="text-xl font-bold">Paste the URL</h3>
-          <p class="text-sm text-gray-600 mt-2">Copy the Instagram link and paste it into the box above.</p>
+          <p class="text-sm text-gray-600 mt-2">Copy any Instagram post link and paste it above.</p>
         </div>
-        <div class="shadow-lg p-6 rounded-xl bg-white">
+        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
           <div class="text-5xl mb-4">⚡</div>
-          <h3 class="text-xl font-bold">Instant Processing</h3>
-          <p class="text-sm text-gray-600 mt-2">We fetch the HD version in seconds. No login needed.</p>
+          <h3 class="text-xl font-bold">We Fetch It</h3>
+          <p class="text-sm text-gray-600 mt-2">Instantly retrieve HD content without logins.</p>
         </div>
-        <div class="shadow-lg p-6 rounded-xl bg-white">
+        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
           <div class="text-5xl mb-4">⬇️</div>
           <h3 class="text-xl font-bold">Download & Enjoy</h3>
-          <p class="text-sm text-gray-600 mt-2">Tap download and enjoy your content — watermark free.</p>
+          <p class="text-sm text-gray-600 mt-2">Click download and save content watermark-free.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-24 px-6 bg-white fade-in">
+  <!-- Features Section -->
+  <section class="py-24 px-6 bg-gray-50 fade-in">
     <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-semibold mb-6">Why Use InstaDL.org?</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="text-left">
-          <ul class="space-y-4 text-gray-700">
-            <li>✔️ Download public Reels, videos, images, and carousels</li>
-            <li>✔️ No sign-in or account needed</li>
-            <li>✔️ Mobile and desktop friendly</li>
-            <li>✔️ Completely free to use</li>
-            <li>✔️ No watermark or compression</li>
-          </ul>
-        </div>
-        <div>
-          <img src="https://techcrunch.com/wp-content/uploads/2023/03/alexander-shatov-71Qk8ODIBko-unsplash.jpg?w=1024" class="rounded-xl shadow-md w-full" alt="Tech interface">
-        </div>
+      <h2 class="text-3xl font-semibold mb-6 text-gray-800">Why Use InstaDL.org?</h2>
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <ul class="space-y-4 text-left text-gray-700 text-lg pl-4">
+          <li>✔️ Download Reels, Videos, Photos, Carousels</li>
+          <li>✔️ No sign-in or app required</li>
+          <li>✔️ Works on both mobile and desktop</li>
+          <li>✔️ Completely ad-free downloads</li>
+          <li>✔️ Clean, watermark-free content</li>
+        </ul>
+        <img src="https://techcrunch.com/wp-content/uploads/2023/03/alexander-shatov-71Qk8ODIBko-unsplash.jpg?w=1024" class="rounded-xl shadow-lg w-full" alt="Instagram graphic">
       </div>
     </div>
   </section>
 
-  <section class="py-24 px-6 fade-in">
+  <!-- CTA Section -->
+  <section class="py-24 px-6 bg-white fade-in">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-4">Ready to Download?</h2>
+      <h2 class="text-3xl font-bold mb-4 text-gray-800">Ready to Download?</h2>
       <p class="text-gray-600 mb-6">Paste your Instagram URL above and hit download. It’s that easy.</p>
       <img src="https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1254/MTkwNTgxMTkzOTgyMjI0MjUy/how-to-use-instagram-jpg.webp" class="rounded-lg mx-auto w-full max-w-lg shadow-lg" alt="Phone using Instagram">
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
     <div class="max-w-5xl mx-auto text-center space-y-4">
       <div class="flex flex-wrap justify-center gap-4">
@@ -196,5 +196,6 @@
       <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
     </div>
   </footer>
+
 </body>
 </html>
