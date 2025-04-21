@@ -28,7 +28,13 @@ export default async function handler(req, res) {
     const thumbnail = imageMatch ? decodeURIComponent(imageMatch[1]) : null;
 
     if (!videoUrl && !thumbnail) {
-      return res.status(404).json({ message: 'No media found at this URL' });
+      return res.status(404).json({
+  error: true,
+  message: 'No media found at this URL',
+  thumbnail: null,
+  download_url: null
+});
+
     }
 
     res.status(200).json({
