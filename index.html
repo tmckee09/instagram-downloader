@@ -2,200 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram Video Downloader - Download Reels, Photos & Videos Without Watermark</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - InstaDL</title>
 
-  <!-- ✅ Google AdSense Site-Wide Script -->
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AdSense Script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Download Instagram reels, videos, and photos in HD quality with no watermark. No login required. Secure and works on all devices." />
-  <meta name="keywords" content="Instagram downloader, download Instagram video, Instagram reels downloader, no watermark, IG downloader, save Instagram photo, download Instagram story, SnapInsta alternative" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://instagram-downloader.vercel.app/" />
-  <link rel="icon" href="/favicon.ico" />
-
-  <!-- Tailwind & AlpineJS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
     html { scroll-behavior: smooth; }
-    .fade-in { animation: fadeIn 1.2s ease-in both; }
-    .slide-up { animation: slideUp 1.2s ease-out both; }
+    .fade-in { animation: fadeIn 0.8s ease-in both; }
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes slideUp {
-      0% { transform: translateY(30px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50 text-gray-800 leading-relaxed tracking-wide">
 
-  <!-- Hero Section -->
-  <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] py-20 px-6 text-white shadow-xl fade-in">
-    <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
-      <h1 class="text-4xl font-extrabold mb-4 leading-tight">
-        <span class="text-white drop-shadow-sm">Instagram</span>
-        <span class="text-yellow-300 drop-shadow-sm">Video Downloader</span>
-      </h1>
-      <p class="text-lg mb-6 text-white/90">
-        <span class="block">Download <span class="text-yellow-200 font-semibold">Reels, Photos, and Videos</span> in HD</span>
-        <span class="block text-white/80 text-sm mt-1">No Watermarks. No Login Required.</span>
+  <header class="bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-400 text-white py-10 px-6 text-center fade-in">
+    <h1 class="text-4xl font-bold">Privacy Policy</h1>
+    <p class="text-sm mt-2 opacity-90">Effective Date: April 21, 2025</p>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 fade-in">
+    <section class="mb-10">
+      <p class="text-lg text-gray-700 mb-4">
+        This Privacy Policy describes our policies and procedures on the collection, use, and disclosure of your information when you use the Service and tells you about your privacy rights and how the law protects you.
       </p>
+      <p class="text-gray-600">
+        By using InstaDL.org ("we", "us", or "our"), you agree to the collection and use of information in accordance with this Privacy Policy. This policy applies to all users and outlines your rights under laws including the CCPA and GDPR.
+      </p>
+    </section>
 
-      <!-- Input Form Glass Box -->
-      <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
-        <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
-          loading = true;
-          fetch('/api/download', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: $refs.urlInput.value })
-          })
-          .then(res => res.json())
-          .then(data => {
-            result = data;
-            loading = false;
-            error = '';
-            fetch('/api/track', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
-            });
-            if (data.download_url) {
-              const link = document.createElement('a');
-              link.href = data.download_url;
-              link.download = '';
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            }
-          })
-          .catch(() => {
-            error = 'Failed to fetch media.';
-            loading = false;
-          });">
-          <div class="flex flex-col sm:flex-row w-full gap-2">
-            <input 
-              type="text" 
-              placeholder="Insert Instagram link here"
-              x-ref="urlInput"
-              class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-            />
-            <button 
-              type="button"
-              class="bg-white/80 text-gray-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white transition flex items-center gap-2"
-              @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
-              📋 Paste
-            </button>
-          </div>
-          <button 
-            type="submit"
-            class="bg-pink-600 text-white py-3 rounded-lg w-full sm:w-auto font-semibold hover:bg-pink-700 transition">
-            Download
-          </button>
-        </form>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Interpretation and Definitions</h2>
+      <ul class="space-y-3 text-gray-700 list-disc list-inside">
+        <li><strong>Company:</strong> InstaDL.org</li>
+        <li><strong>Service:</strong> Refers to the website accessible from https://instadl.org</li>
+        <li><strong>Cookies:</strong> Small data files used to identify your device.</li>
+        <li><strong>Device:</strong> Any internet-connected device such as a phone or computer.</li>
+        <li><strong>Personal Data:</strong> Any data that relates to an identifiable individual.</li>
+        <li><strong>Usage Data:</strong> Data collected automatically, such as IP address and browser type.</li>
+        <li><strong>You:</strong> The individual accessing the Service, a.k.a. the user or data subject.</li>
+      </ul>
+    </section>
 
-        <!-- Status -->
-        <div class="mt-4 text-sm text-white/90" x-show="loading">Grabbing download link...</div>
-        <template x-if="error">
-          <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
-        </template>
-        <template x-if="result && result.download_url">
-          <div class="mt-6 text-center slide-up">
-            <template x-if="result.thumbnail">
-              <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
-            </template>
-            <template x-if="!result.thumbnail">
-              <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
-                <span class="text-sm">No preview available</span>
-              </div>
-            </template>
-            <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
-              x-text="result.media_type === 'video' ? 'Download Video' : 'Download Image'">
-            </a>
-          </div>
-        </template>
-        <p class="mt-8 text-xs text-center text-white/80">Only public Instagram content is supported. Private or restricted posts cannot be downloaded.</p>
-      </div>
-    </div>
-  </section>
-  <!-- Divider -->
-  <div class="w-full h-4 bg-gradient-to-r from-pink-300 via-yellow-300 to-orange-400"></div>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Cookies and Tracking</h2>
+      <p class="text-gray-700 mb-2">
+        InstaDL.org uses cookies and similar technologies to enhance your experience, including:
+      </p>
+      <ul class="list-disc list-inside text-gray-600">
+        <li><strong>Essential Cookies:</strong> Required for basic functionality.</li>
+        <li><strong>Analytics Cookies:</strong> Track user behavior using tools like Google Analytics.</li>
+        <li><strong>Ad Cookies:</strong> Served by Google AdSense for personalized ads.</li>
+      </ul>
+      <p class="text-gray-600 mt-2">You can manage cookie preferences through your browser settings.</p>
+    </section>
 
-  <!-- How It Works -->
-  <section class="py-24 px-6 text-center fade-in bg-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold mb-6 text-gray-800">How It Works</h2>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
-          <div class="text-5xl mb-4">📋</div>
-          <h3 class="text-xl font-bold">Paste the URL</h3>
-          <p class="text-sm text-gray-600 mt-2">Copy any Instagram post link and paste it above.</p>
-        </div>
-        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
-          <div class="text-5xl mb-4">⚡</div>
-          <h3 class="text-xl font-bold">We Fetch It</h3>
-          <p class="text-sm text-gray-600 mt-2">Instantly retrieve HD content without logins.</p>
-        </div>
-        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
-          <div class="text-5xl mb-4">⬇️</div>
-          <h3 class="text-xl font-bold">Download & Enjoy</h3>
-          <p class="text-sm text-gray-600 mt-2">Click download and save content watermark-free.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Use of Personal Data</h2>
+      <p class="text-gray-700">
+        We may use your personal data for the following purposes:
+      </p>
+      <ul class="list-disc list-inside text-gray-600">
+        <li>To operate and maintain our service</li>
+        <li>To analyze usage and improve user experience</li>
+        <li>To comply with legal obligations</li>
+        <li>To personalize content and advertising</li>
+        <li>To respond to inquiries and support requests</li>
+      </ul>
+    </section>
 
-  <!-- Features Section -->
-  <section class="py-24 px-6 bg-gray-50 fade-in">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-semibold mb-6 text-gray-800">Why Use InstaDL.org?</h2>
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <ul class="space-y-4 text-left text-gray-700 text-lg pl-4">
-          <li>✔️ Download Reels, Videos, Photos, Carousels</li>
-          <li>✔️ No sign-in or app required</li>
-          <li>✔️ Works on both mobile and desktop</li>
-          <li>✔️ Completely ad-free downloads</li>
-          <li>✔️ Clean, watermark-free content</li>
-        </ul>
-        <img src="https://techcrunch.com/wp-content/uploads/2023/03/alexander-shatov-71Qk8ODIBko-unsplash.jpg?w=1024" class="rounded-xl shadow-lg w-full" alt="Instagram graphic">
-      </div>
-    </div>
-  </section>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Sharing of Personal Data</h2>
+      <p class="text-gray-700">
+        We do not sell your personal data. We may share data with trusted partners for analytics, advertising, or to comply with legal obligations.
+      </p>
+    </section>
 
-  <!-- CTA Section -->
-  <section class="py-24 px-6 bg-white fade-in">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-4 text-gray-800">Ready to Download?</h2>
-      <p class="text-gray-600 mb-6">Paste your Instagram URL above and hit download. It’s that easy.</p>
-      <img src="https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1254/MTkwNTgxMTkzOTgyMjI0MjUy/how-to-use-instagram-jpg.webp" class="rounded-lg mx-auto w-full max-w-lg shadow-lg" alt="Phone using Instagram">
-    </div>
-  </section>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Your Rights</h2>
+      <p class="text-gray-700 mb-2">
+        Under GDPR and CCPA, you may have the right to:
+      </p>
+      <ul class="list-disc list-inside text-gray-600">
+        <li>Request access to or deletion of your data</li>
+        <li>Withdraw consent for marketing communications</li>
+        <li>Object to or restrict processing of your data</li>
+        <li>Request data portability</li>
+      </ul>
+      <p class="text-gray-600 mt-2">
+        To exercise these rights, contact us at <a href="mailto:support@instadl.org" class="text-pink-600 underline">support@instadl.org</a>.
+      </p>
+    </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
-    <div class="max-w-5xl mx-auto text-center space-y-4">
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="#top" class="hover:text-white">Video</a>
-        <a href="#top" class="hover:text-white">Photo</a>
-        <a href="#top" class="hover:text-white">Reels</a>
-        <span>Story</span>
-        <span>Viewer</span>
-        <span>Igtv</span>
-        <span>Carousel</span>
-        <span>Contact</span>
-        <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
-        <span>Terms & Conditions</span>
-        <span>Horoscope</span>
-        <span>Tiktok Video Downloader</span>
-      </div>
-      <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
-    </div>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Security</h2>
+      <p class="text-gray-700">
+        We use appropriate technical and organizational measures to safeguard your data, but no method of transmission over the Internet is completely secure.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Changes to This Policy</h2>
+      <p class="text-gray-700">
+        We may update this policy from time to time. We encourage users to review it periodically.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Contact</h2>
+      <p class="text-gray-700">
+        For any questions about this policy, contact us via <a href="mailto:support@instadl.org" class="text-pink-600 underline">support@instadl.org</a> or our contact page.
+      </p>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-gray-400 text-sm py-8 px-6 text-center">
+    <p>© 2025 InstaDL. All rights reserved.</p>
+    <a href="/" class="text-pink-400 hover:text-white block mt-1">← Back to Home</a>
   </footer>
-
 </body>
 </html>
