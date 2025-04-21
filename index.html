@@ -43,37 +43,68 @@
 </h1>
 <p class="text-lg mb-6 text-white/90">
   <span class="block">Download <span class="text-yellow-200 font-semibold">Reels, Photos, and Videos</span> in HD</span>
-  <span class="block text-white/80 text-sm mt-1">No Watermarks. No Login. <span class="text-green-200">100% Free</span>.</span>
+  <span class="block text-white/80 text-sm mt-1">No Watermarks. No Login Required.</span>
 </p>
-      <input type="text" placeholder="Paste Instagram post URL here" class="w-full border border-white p-3 rounded-lg mb-4 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" x-ref="urlInput" />
-      <button class="w-full bg-white text-pink-600 py-3 rounded-lg font-semibold text-sm hover:bg-gray-100 transition"
-        @click="loading = true; fetch('/api/download', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: $refs.urlInput.value })
-        })
-        .then(res => res.json())
-        .then(data => {
-          result = data;
-          loading = false;
-          error = '';
-          fetch('/api/track', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
-          });
-          if (data.download_url) {
-            const link = document.createElement('a');
-            link.href = data.download_url;
-            link.download = '';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
-        })
-        .catch(() => { error = 'Failed to fetch media.'; loading = false; })">
-        Download
-      </button>
+      <form class="flex flex-col sm:flex-row gap-4 mt-6" @submit.prevent="
+  loading = true;
+  fetch('/api/download', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: $refs.urlInput.value })
+  })
+  .then(res => res.json())
+  .then(data => {
+    result = data;
+    loading = false;
+    error = '';
+    
+    fetch('/api/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
+    });
+
+    if (data.download_url) {
+      const link = document.createElement('a');
+      link.href = data.download_url;
+      link.download = '';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  })
+  .catch(() => {
+    error = 'Failed to fetch media.';
+    loading = false;
+  });
+">
+  <!-- URL Input -->
+  <div class="flex flex-col sm:flex-row w-full gap-2">
+    <input 
+      type="text" 
+      placeholder="Insert Instagram link here"
+      x-ref="urlInput"
+      class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+    />
+    <!-- Paste button -->
+    <button 
+      type="button"
+      class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition flex items-center gap-2"
+      @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)"
+    >
+      📋 Paste
+    </button>
+  </div>
+
+  <!-- Download Button -->
+  <button 
+    type="submit"
+    class="bg-pink-600 text-white py-3 rounded-lg w-full sm:w-auto font-semibold hover:bg-pink-700 transition"
+  >
+    Download
+  </button>
+</form>
+
       <div class="mt-4 text-sm text-white/90" x-show="loading">Grabbing download link...</div>
       <template x-if="error">
         <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
