@@ -4,27 +4,23 @@ export default async function handler(req, res) {
   }
 
   const { url } = req.body;
+
   if (!url || !url.includes('instagram.com')) {
     return res.status(400).json({ message: 'Invalid Instagram URL' });
   }
 
   try {
-    const response = await fetch('https://igram.io/i/', {
-      method: 'POST',
+    const response = await fetch('https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/index', {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
+        'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com'
       },
-      body: new URLSearchParams({ url }),
     });
 
-    const html = await response.text();
+    const data = await response.json();
 
-    // Try to find video or image URL from the HTML (fallback basic match)
-    const videoMatch = html.match(/href="(https:\/\/[^"]+\.mp4)"/);
-    const imageMatch = html.match(/href="(https:\/\/[^"]+\.jpg)"/);
-
-    const downloadUrl = videoMatch?.[1] || imageMatch?.[1];
-    if (!downloadUrl) {
+    if (!data || !data.media || !data.media.url) {
       return res.status(404).json({
         error: true,
         message: 'No downloadable media found',
@@ -33,13 +29,12 @@ export default async function handler(req, res) {
       });
     }
 
-    res.status(200).json({
-      thumbnail: null, // could improve this later
-      download_url: downloadUrl,
+    return res.status(200).json({
+      thumbnail: data.media.thumbnail || null,
+      download_url: data.media.url
     });
   } catch (err) {
-    console.error('Backup IG fetch failed:', err);
+    console.error('RapidAPI error:', err);
     res.status(500).json({ message: 'Failed to fetch download data' });
   }
 }
-
