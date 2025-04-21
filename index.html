@@ -67,18 +67,28 @@
 
     <template x-if="result && result.download_url">
   <div class="mt-6 text-center">
+    
+    <!-- ✅ Conditional Thumbnail -->
     <template x-if="result.thumbnail">
       <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover">
     </template>
+    <template x-if="!result.thumbnail">
+      <div class="w-full h-64 flex items-center justify-center bg-gray-100 text-gray-500 border border-dashed border-gray-400 rounded mb-3">
+        <span class="text-sm">No preview available</span>
+      </div>
+    </template>
+
+    <!-- ✅ Smart Download Button -->
     <a 
       :href="result.download_url" 
       target="_blank" 
       class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
-    >
-      Download Media
-    </a>
+      x-text="result.media_type === 'video' ? 'Download Video' : 'Download Image'"
+    ></a>
+
   </div>
 </template>
+
 
 
     <p class="mt-8 text-xs text-center text-gray-400">
