@@ -30,36 +30,41 @@ export default async function handler(req, res) {
       });
     }
 
-    // ✅ Validate main download URL
-    const headRes = await fetch(file.url, { method: 'HEAD' });
-    const type = headRes.headers.get('content-type');
-    if (!type || (!type.includes('image') && !type.includes('video'))) {
-      return res.status(415).json({
-        error: true,
-        message: 'Download URL is not a valid media file',
-        thumbnail: null,
-        download_url: null
-      });
-    }
+// ✅ Validate main download URL
+const headRes = await fetch(file.url, { method: 'HEAD' });
+const type = headRes.headers.get('content-type');
+if (!type || (!type.includes('image') && !type.includes('video'))) {
+  return res.status(415).json({
+    error: true,
+    message: 'Download URL is not a valid media file',
+    thumbnail: null,
+    download_url: null
+  });
+}
 
-    // ✅ Validate thumbnail (if present)
-    let thumbnail = null;
-    if (file.thumbnail) {
-      try {
-        const thumbRes = await fetch(file.thumbnail, { method: 'HEAD' });
-        const thumbType = thumbRes.headers.get('content-type');
-        if (thumbType && thumbType.includes('image')) {
-          thumbnail = file.thumbnail;
-        }
-      } catch (err) {
-        console.warn('Thumbnail validation failed:', err);
-      }
-    }
+const mediaType = type.includes('video') ? 'video' : 'image';
 
-    return res.status(200).json({
-      thumbnail,
-      download_url: file.url
-    });
+// ✅ Use download URL as fallback thumbnail if it's an image
+let thumbnail = null;
+if (mediaType === 'image') {
+  thumbnail = file.url;
+} else if (file.thumbnail) {
+  try {
+    const thumbRes = await fetch(file.thumbnail, { method: 'HEAD' });
+    const thumbType = thumbRes.headers.get('content-type');
+    if (thumbType && thumbType.includes('image')) {
+      thumbnail = file.thumbnail;
+    }
+  } catch (err) {
+    console.warn('Thumbnail validation failed:', err);
+  }
+}
+
+return res.status(200).json({
+  thumbnail,
+  download_url: file.url,
+  media_type: mediaType
+});
   } catch (err) {
     console.error('RapidAPI error:', err);
     res.status(500).json({ message: 'Failed to fetch download data' });
