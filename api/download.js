@@ -19,14 +19,26 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    console.log("RapidAPI final response:", data);
-
     const file = data?.media?.[0];
 
     if (!file?.url) {
       return res.status(404).json({
         error: true,
         message: 'No downloadable media found',
+        thumbnail: null,
+        download_url: null
+      });
+    }
+
+    // Validate MIME type (make sure it's an image or video)
+    const headResponse = await fetch(file.url, { method: 'HEAD' });
+    const contentType = headResponse.headers.get('content-type');
+
+    if (!contentType || (!contentType.includes('image') && !contentType.includes('video'))) {
+      return res.status(415).json({
+        error: true,
+        message: 'File is not a valid media type',
+        content_type: contentType,
         thumbnail: null,
         download_url: null
       });
