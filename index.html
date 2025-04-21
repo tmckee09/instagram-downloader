@@ -9,7 +9,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Download Instagram reels, videos, and photos in HD quality with no watermark. Fast, free, and no login required. 100% secure and works on all devices." />
+  <meta name="description" content="Download Instagram reels, videos, and photos in HD quality with no watermark. No login required. Secure and works on all devices." />
   <meta name="keywords" content="Instagram downloader, download Instagram video, Instagram reels downloader, no watermark, IG downloader, save Instagram photo, download Instagram story, SnapInsta alternative" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://instagram-downloader.vercel.app/" />
@@ -38,100 +38,94 @@
   <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] py-20 px-6 text-white shadow-xl fade-in">
     <div class="w-full max-w-xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
       <h1 class="text-4xl font-extrabold mb-4 leading-tight">
-  <span class="text-white drop-shadow-sm">Instagram</span>
-  <span class="text-yellow-300 drop-shadow-sm">Video Downloader</span>
-</h1>
-<p class="text-lg mb-6 text-white/90">
-  <span class="block">Download <span class="text-yellow-200 font-semibold">Reels, Photos, and Videos</span> in HD</span>
-  <span class="block text-white/80 text-sm mt-1">No Watermarks. No Login Required.</span>
-</p>
-      <form class="flex flex-col sm:flex-row gap-4 mt-6" @submit.prevent="
-  loading = true;
-  fetch('/api/download', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ url: $refs.urlInput.value })
-  })
-  .then(res => res.json())
-  .then(data => {
-    result = data;
-    loading = false;
-    error = '';
-    
-    fetch('/api/track', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
-    });
+        <span class="text-white drop-shadow-sm">Instagram</span>
+        <span class="text-yellow-300 drop-shadow-sm">Video Downloader</span>
+      </h1>
+      <p class="text-lg mb-6 text-white/90">
+        <span class="block">Download <span class="text-yellow-200 font-semibold">Reels, Photos, and Videos</span> in HD</span>
+        <span class="block text-white/80 text-sm mt-1">No Watermarks. No Login Required.</span>
+      </p>
 
-    if (data.download_url) {
-      const link = document.createElement('a');
-      link.href = data.download_url;
-      link.download = '';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  })
-  .catch(() => {
-    error = 'Failed to fetch media.';
-    loading = false;
-  });
-">
-  <!-- URL Input -->
-  <div class="flex flex-col sm:flex-row w-full gap-2">
-    <input 
-      type="text" 
-      placeholder="Insert Instagram link here"
-      x-ref="urlInput"
-      class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-    />
-    <!-- Paste button -->
-    <button 
-      type="button"
-      class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition flex items-center gap-2"
-      @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)"
-    >
-      📋 Paste
-    </button>
-  </div>
+      <!-- Form Container with Border and Shadow -->
+      <div class="mt-8 bg-white/70 backdrop-blur-md rounded-xl shadow-xl px-6 py-6 w-full max-w-2xl mx-auto border border-white/50">
+        <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+          loading = true;
+          fetch('/api/download', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: $refs.urlInput.value })
+          })
+          .then(res => res.json())
+          .then(data => {
+            result = data;
+            loading = false;
+            error = '';
 
-  <!-- Download Button -->
-  <button 
-    type="submit"
-    class="bg-pink-600 text-white py-3 rounded-lg w-full sm:w-auto font-semibold hover:bg-pink-700 transition"
-  >
-    Download
-  </button>
-</form>
+            fetch('/api/track', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
+            });
 
-      <div class="mt-4 text-sm text-white/90" x-show="loading">Grabbing download link...</div>
-      <template x-if="error">
-        <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
-      </template>
-      <template x-if="result && result.download_url">
-        <div class="mt-6 text-center slide-up">
-          <template x-if="result.thumbnail">
-            <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
-          </template>
-          <template x-if="!result.thumbnail">
-            <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
-              <span class="text-sm">No preview available</span>
-            </div>
-          </template>
-          <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
-            x-text="result.media_type === 'video' ? 'Download Video' : 'Download Image'">
-          </a>
-        </div>
-      </template>
-      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram content is supported. Private or restricted posts cannot be downloaded.</p>
+            if (data.download_url) {
+              const link = document.createElement('a');
+              link.href = data.download_url;
+              link.download = '';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }
+          })
+          .catch(() => {
+            error = 'Failed to fetch media.';
+            loading = false;
+          });">
+          <div class="flex flex-col sm:flex-row w-full gap-2">
+            <input 
+              type="text" 
+              placeholder="Insert Instagram link here"
+              x-ref="urlInput"
+              class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+            />
+            <button 
+              type="button"
+              class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition flex items-center gap-2"
+              @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
+              📋 Paste
+            </button>
+          </div>
+          <button 
+            type="submit"
+            class="bg-pink-600 text-white py-3 rounded-lg w-full sm:w-auto font-semibold hover:bg-pink-700 transition">
+            Download
+          </button>
+        </form>
+        <div class="mt-4 text-sm text-white/90" x-show="loading">Grabbing download link...</div>
+        <template x-if="error">
+          <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
+        </template>
+        <template x-if="result && result.download_url">
+          <div class="mt-6 text-center slide-up">
+            <template x-if="result.thumbnail">
+              <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
+            </template>
+            <template x-if="!result.thumbnail">
+              <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
+                <span class="text-sm">No preview available</span>
+              </div>
+            </template>
+            <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
+              x-text="result.media_type === 'video' ? 'Download Video' : 'Download Image'">
+            </a>
+          </div>
+        </template>
+        <p class="mt-8 text-xs text-center text-white/80">Only public Instagram content is supported. Private or restricted posts cannot be downloaded.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Decorative Divider -->
   <div class="w-full h-4 bg-gradient-to-r from-pink-300 via-yellow-300 to-orange-400"></div>
 
-  <!-- How It Works -->
   <section class="py-24 px-6 text-center fade-in">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold mb-6">How It Works</h2>
@@ -155,7 +149,6 @@
     </div>
   </section>
 
-  <!-- Features Section -->
   <section class="py-24 px-6 bg-white fade-in">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl font-semibold mb-6">Why Use InstaDL.org?</h2>
@@ -176,7 +169,6 @@
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="py-24 px-6 fade-in">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-4">Ready to Download?</h2>
@@ -185,7 +177,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
     <div class="max-w-5xl mx-auto text-center space-y-4">
       <div class="flex flex-wrap justify-center gap-4">
