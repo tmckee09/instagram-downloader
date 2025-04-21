@@ -4,8 +4,7 @@ export default async function handler(req, res) {
   }
 
   const { url } = req.body;
-
-  if (!url || !url.includes("instagram.com")) {
+  if (!url || !url.includes('instagram.com')) {
     return res.status(400).json({ message: 'Invalid Instagram URL' });
   }
 
@@ -14,27 +13,25 @@ export default async function handler(req, res) {
       headers: {
         'User-Agent': 'Mozilla/5.0',
         'Accept-Language': 'en-US,en;q=0.9',
-      }
+      },
     });
 
     const html = await response.text();
 
-    const videoMatch = html.match(/"video_url":"(.*?)"/);
-    const imageMatch = html.match(/"display_url":"(.*?)"/);
+    // Match Open Graph video and image
+    const ogVideoMatch = html.match(/<meta property="og:video" content="(.*?)"/);
+    const ogImageMatch = html.match(/<meta property="og:image" content="(.*?)"/);
 
-    console.log({ videoMatch, imageMatch }); // <- Add this
-
-    const videoUrl = videoMatch ? decodeURIComponent(videoMatch[1]) : null;
-    const thumbnail = imageMatch ? decodeURIComponent(imageMatch[1]) : null;
+    const videoUrl = ogVideoMatch ? ogVideoMatch[1] : null;
+    const thumbnail = ogImageMatch ? ogImageMatch[1] : null;
 
     if (!videoUrl && !thumbnail) {
       return res.status(404).json({
-  error: true,
-  message: 'No media found at this URL',
-  thumbnail: null,
-  download_url: null
-});
-
+        error: true,
+        message: 'No media found at this URL',
+        thumbnail: null,
+        download_url: null
+      });
     }
 
     res.status(200).json({
@@ -42,7 +39,7 @@ export default async function handler(req, res) {
       download_url: videoUrl || thumbnail
     });
   } catch (err) {
-    console.error("Error fetching Instagram post:", err);
+    console.error('Scraper error:', err);
     res.status(500).json({ message: 'Failed to fetch Instagram post' });
   }
 }
