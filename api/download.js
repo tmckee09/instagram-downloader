@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/index?url=${encodeURIComponent(url)}`, {
+    const response = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
       method: 'GET',
       headers: {
         'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
@@ -21,9 +21,8 @@ export default async function handler(req, res) {
     const data = await response.json();
     console.log("RapidAPI raw response:", data);
 
-    const media = data?.media || {};
-    const downloadUrl = media?.url || null;
-    const thumbnail = media?.thumbnail || null;
+    const downloadUrl = data?.url || null;
+    const thumbnail = data?.thumbnail || null;
 
     if (!downloadUrl) {
       return res.status(404).json({
