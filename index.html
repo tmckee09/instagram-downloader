@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram Video Downloader</title>
+  <meta name="description" content="Download Instagram videos, reels, and images for free. No login required." />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-lg p-6" x-data="{ loading: false, result: null, error: '' }">
+    <h1 class="text-2xl font-bold mb-4 text-center">Instagram Downloader</h1>
+
+    <input 
+      type="text" 
+      placeholder="Paste Instagram post URL..." 
+      class="w-full border p-2 rounded mb-4"
+      x-ref="urlInput"
+    />
+
+    <button 
+      class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+      @click="loading = true; fetch('/api/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: $refs.urlInput.value })
+      })
+      .then(res => res.json())
+      .then(data => { result = data; loading = false; error = ''; })
+      .catch(() => { error = 'Failed to fetch media.'; loading = false; })"
+    >
+      Download
+    </button>
+
+    <div class="mt-4" x-show="loading">Loading...</div>
+    <template x-if="error">
+      <div class="mt-4 text-red-500 text-sm" x-text="error"></div>
+    </template>
+
+    <template x-if="result">
+      <div class="mt-4">
+        <img :src="result.thumbnail" alt="preview" class="rounded mb-2 max-h-64 w-full object-cover">
+        <a :href="result.download_url" target="_blank" class="block text-center bg-green-500 text-white py-2 rounded hover:bg-green-600">
+          Download Media
+        </a>
+      </div>
+    </template>
+  </div>
+</body>
+</html>
