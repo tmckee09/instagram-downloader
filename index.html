@@ -3,26 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram Video Downloader</title>
-  <meta name="description" content="Download Instagram videos, reels, and images for free. No login required." />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <title>Instagram Video Downloader - Download Reels, Photos & Videos Without Watermark</title>
 
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Download Instagram reels, videos, and photos in HD quality with no watermark. Fast, free, and no login required. 100% secure and works on all devices." />
+  <meta name="keywords" content="Instagram downloader, download Instagram video, Instagram reels downloader, no watermark, IG downloader, save Instagram photo, download Instagram story, SnapInsta alternative" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="InstaSave" />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Instagram Video Downloader - Download Reels & Videos Without Watermark" />
+  <meta property="og:description" content="Paste an Instagram link to download reels, videos, and images in HD. No watermark. No login." />
+  <meta property="og:url" content="https://instagram-downloader.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://instagram-downloader.vercel.app/preview.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Instagram Downloader - Save Reels, Stories & Videos Fast" />
+  <meta name="twitter:description" content="Free Instagram downloader. Paste a URL and download content in HD with no watermark. Works for reels, videos, and photos." />
+  <meta name="twitter:image" content="https://instagram-downloader.vercel.app/preview.png" />
+
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://instagram-downloader.vercel.app/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Styles & Scripts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
-  <div class="max-w-md w-full bg-white rounded-2xl shadow-lg p-6" x-data="{ loading: false, result: null, error: '' }">
-    <h1 class="text-2xl font-bold mb-4 text-center">Instagram Downloader</h1>
+<body class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] min-h-screen flex flex-col items-center justify-start p-6 text-gray-800">
+  <main class="w-full max-w-xl mt-20 bg-white border border-gray-200 rounded-xl shadow-xl p-6" 
+        x-data="{ loading: false, result: null, error: '' }">
+
+    <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">Instagram Video Downloader</h1>
+    <p class="text-center text-gray-600 mb-6 text-sm">
+      Download reels, videos, and photos from Instagram — clean and watermark-free. Free, fast, no login needed.
+    </p>
 
     <input 
       type="text" 
-      placeholder="Paste Instagram post URL..." 
-      class="w-full border p-2 rounded mb-4"
+      placeholder="Paste Instagram post URL here" 
+      class="w-full border border-gray-300 p-3 rounded-lg mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
       x-ref="urlInput"
     />
 
     <button 
-      class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+      class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold text-sm hover:bg-pink-700 transition"
       @click="loading = true; fetch('/api/download', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -35,19 +64,28 @@
       Download
     </button>
 
-    <div class="mt-4" x-show="loading">Loading...</div>
+    <div class="mt-4 text-center text-sm text-gray-500" x-show="loading">Grabbing download link...</div>
+
     <template x-if="error">
-      <div class="mt-4 text-red-500 text-sm" x-text="error"></div>
+      <div class="mt-4 text-red-500 text-sm text-center" x-text="error"></div>
     </template>
 
     <template x-if="result">
-      <div class="mt-4">
-        <img :src="result.thumbnail" alt="preview" class="rounded mb-2 max-h-64 w-full object-cover">
-        <a :href="result.download_url" target="_blank" class="block text-center bg-green-500 text-white py-2 rounded hover:bg-green-600">
+      <div class="mt-6 text-center">
+        <img :src="result.thumbnail" alt="Instagram post preview" class="rounded mb-3 w-full max-h-64 object-cover">
+        <a 
+          :href="result.download_url" 
+          target="_blank" 
+          class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
+        >
           Download Media
         </a>
       </div>
     </template>
-  </div>
+
+    <p class="mt-8 text-xs text-center text-gray-400">
+      Only public Instagram content is supported. Private or restricted posts cannot be downloaded.
+    </p>
+  </main>
 </body>
 </html>
