@@ -37,27 +37,45 @@
     />
 
     <button 
-      class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold text-sm hover:bg-pink-700 transition"
-      @click="loading = true; fetch('/api/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: $refs.urlInput.value })
-      })
-      .then(res => res.json())
-      .then(data => {
-  if (data.error || !data.download_url) {
-    error = data.message || 'Invalid media URL';
-    result = null;
-  } else {
+  class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold text-sm hover:bg-pink-700 transition"
+  @click="loading = true; fetch('/api/download', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: $refs.urlInput.value })
+  })
+  .then(res => res.json())
+  .then(data => {
     result = data;
+    loading = false;
     error = '';
-  }
-  loading = false;
-})
-      .catch(() => { error = 'Failed to fetch media.'; loading = false; })"
-    >
-      Download
-    </button>
+
+    // Track analytics
+    fetch('/api/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        success: !!data.download_url,
+        url: $refs.urlInput.value
+      })
+    });
+
+    // Auto-start download
+    if (data.download_url) {
+      const link = document.createElement('a');
+      link.href = data.download_url;
+      link.download = '';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  })
+  .catch(() => {
+    error = 'Failed to fetch media.';
+    loading = false;
+  })"
+>
+  Download
+</button>
 
     <div class="mt-4 text-center text-sm text-gray-500" x-show="loading">Grabbing download link...</div>
 
