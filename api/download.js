@@ -19,12 +19,11 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    console.log("RapidAPI raw response:", data);
+    console.log("RapidAPI final response:", data);
 
-    const downloadUrl = data?.url || null;
-    const thumbnail = data?.thumbnail || null;
+    const file = data?.media?.[0];
 
-    if (!downloadUrl) {
+    if (!file?.url) {
       return res.status(404).json({
         error: true,
         message: 'No downloadable media found',
@@ -34,8 +33,8 @@ export default async function handler(req, res) {
     }
 
     return res.status(200).json({
-      thumbnail,
-      download_url: downloadUrl
+      thumbnail: file.thumbnail || null,
+      download_url: file.url
     });
   } catch (err) {
     console.error('RapidAPI error:', err);
