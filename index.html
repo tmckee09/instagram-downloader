@@ -6,8 +6,7 @@
   <title>Instagram Video Downloader - Download Reels, Photos & Videos Without Watermark</title>
 
   <!-- ✅ Google AdSense Site-Wide Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Download Instagram reels, videos, and photos in HD quality with no watermark. Fast, free, and no login required. 100% secure and works on all devices." />
@@ -16,30 +15,26 @@
 
   <!-- Canonical Link -->
   <link rel="canonical" href="https://instagram-downloader.vercel.app/" />
-
-  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Styles & Scripts -->
+  <!-- Tailwind & AlpineJS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
-  <!-- Downloader Section -->
-  <section class="bg-white py-16 px-6 shadow-md">
-    <div class="w-full max-w-xl mx-auto border border-gray-200 rounded-xl p-6" x-data="{ loading: false, result: null, error: '' }">
-      <h1 class="text-3xl font-bold text-center mb-2">Instagram Video Downloader</h1>
-      <p class="text-center text-gray-600 mb-6 text-sm">Download reels, videos, and photos from Instagram — clean and watermark-free. Free, fast, no login needed.</p>
 
-      <input 
-        type="text" 
-        placeholder="Paste Instagram post URL here" 
-        class="w-full border border-gray-300 p-3 rounded-lg mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
-        x-ref="urlInput"
-      />
-
-      <button 
-        class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold text-sm hover:bg-pink-700 transition"
+  <!-- Hero Section with Instagram Gradient -->
+  <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] py-20 px-6 text-white shadow-xl">
+    <div class="w-full max-w-xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
+      <h1 class="text-4xl font-bold mb-4">Instagram Video Downloader</h1>
+      <p class="text-lg mb-6">Download Reels, Photos, and Videos in HD — No Watermarks. No Login. 100% Free.</p>
+      <input type="text" placeholder="Paste Instagram post URL here" class="w-full border border-white p-3 rounded-lg mb-4 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" x-ref="urlInput" />
+      <button class="w-full bg-white text-pink-600 py-3 rounded-lg font-semibold text-sm hover:bg-gray-100 transition"
         @click="loading = true; fetch('/api/download', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -64,74 +59,58 @@
             document.body.removeChild(link);
           }
         })
-        .catch(() => { error = 'Failed to fetch media.'; loading = false; })"
-      >
+        .catch(() => { error = 'Failed to fetch media.'; loading = false; })">
         Download
       </button>
-
-      <div class="mt-4 text-center text-sm text-gray-500" x-show="loading">Grabbing download link...</div>
-
+      <div class="mt-4 text-sm text-white/90" x-show="loading">Grabbing download link...</div>
       <template x-if="error">
-        <div class="mt-4 text-red-500 text-sm text-center" x-text="error"></div>
+        <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
       </template>
-
       <template x-if="result && result.download_url">
-        <div class="mt-6 text-center">
+        <div class="mt-6 text-center animate-fade-in">
           <template x-if="result.thumbnail">
-            <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover">
+            <img :src="result.thumbnail" alt="Instagram preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
           </template>
           <template x-if="!result.thumbnail">
-            <div class="w-full h-64 flex items-center justify-center bg-gray-100 text-gray-500 border border-dashed border-gray-400 rounded mb-3">
+            <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
               <span class="text-sm">No preview available</span>
             </div>
           </template>
-          <a 
-            :href="result.download_url" 
-            target="_blank" 
-            class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
-            x-text="result.media_type === 'video' ? 'Download Video' : 'Download Image'"
-          ></a>
+          <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
+            x-text="result.media_type === 'video' ? 'Download Video' : 'Download Image'">
+          </a>
         </div>
       </template>
-
-      <p class="mt-8 text-xs text-center text-gray-400">Only public Instagram content is supported. Private or restricted posts cannot be downloaded.</p>
+      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram content is supported. Private or restricted posts cannot be downloaded.</p>
     </div>
   </section>
 
-  <!-- Informational Sections -->
+  <!-- How It Works -->
   <section class="py-24 px-6 text-center">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="text-4xl font-bold mb-4">Download Instagram Reels & Videos Instantly</h2>
-      <p class="text-lg mb-8 text-gray-600">Fast. No watermarks. 100% Free. Works on mobile & desktop. Just paste your link and download.</p>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2efdGgxp1c-pxir69vZb39AR5ATKuHRvZnQ&s" class="rounded-xl shadow-xl w-full max-w-xl mx-auto" alt="Instagram download illustration">
-    </div>
-  </section>
-
-  <section class="py-20 px-6 bg-white">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-semibold mb-4">How It Works</h2>
-      <p class="mb-10 text-gray-600">InstaDL is the easiest way to save your favorite Instagram content. No login required, and no hassle.</p>
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How It Works</h2>
       <div class="grid md:grid-cols-3 gap-10">
-        <div>
+        <div class="shadow-lg p-6 rounded-xl bg-white">
           <div class="text-5xl mb-4">📋</div>
           <h3 class="text-xl font-bold">Paste the URL</h3>
-          <p class="text-sm text-gray-500 mt-2">Copy the Instagram link to a post, story, or reel and paste it into the box.</p>
+          <p class="text-sm text-gray-600 mt-2">Copy the Instagram link and paste it into the box above.</p>
         </div>
-        <div>
+        <div class="shadow-lg p-6 rounded-xl bg-white">
           <div class="text-5xl mb-4">⚡</div>
           <h3 class="text-xl font-bold">Instant Processing</h3>
-          <p class="text-sm text-gray-500 mt-2">We grab the HD version instantly with no ads or tracking.</p>
+          <p class="text-sm text-gray-600 mt-2">We fetch the HD version in seconds. No login needed.</p>
         </div>
-        <div>
+        <div class="shadow-lg p-6 rounded-xl bg-white">
           <div class="text-5xl mb-4">⬇️</div>
-          <h3 class="text-xl font-bold">Download & Save</h3>
-          <p class="text-sm text-gray-500 mt-2">Click download and your media will save instantly, watermark-free.</p>
+          <h3 class="text-xl font-bold">Download & Enjoy</h3>
+          <p class="text-sm text-gray-600 mt-2">Tap download and enjoy your content — watermark free.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-24 px-6">
+  <!-- Features Section -->
+  <section class="py-24 px-6 bg-white">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl font-semibold mb-6">Why Use InstaDL.org?</h2>
       <div class="grid md:grid-cols-2 gap-8">
@@ -151,12 +130,34 @@
     </div>
   </section>
 
-  <section class="py-24 px-6 bg-white">
+  <!-- CTA -->
+  <section class="py-24 px-6">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-4">Ready to Download?</h2>
       <p class="text-gray-600 mb-6">Paste your Instagram URL above and hit download. It’s that easy.</p>
       <img src="https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1254/MTkwNTgxMTkzOTgyMjI0MjUy/how-to-use-instagram-jpg.webp" class="rounded-lg mx-auto w-full max-w-lg shadow-lg" alt="Phone using Instagram">
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
+    <div class="max-w-5xl mx-auto text-center space-y-4">
+      <div class="flex flex-wrap justify-center gap-4">
+        <span>Video</span>
+        <a href="#top" class="hover:text-white">Photo</a>
+        <a href="#top" class="hover:text-white">Reels</a>
+        <span>Story</span>
+        <span>Viewer</span>
+        <span>Igtv</span>
+        <span>Carousel</span>
+        <span>Contact</span>
+        <span>Privacy Policy</span>
+        <span>Terms & Conditions</span>
+        <span>Horoscope</span>
+        <span>Tiktok Video Downloader</span>
+      </div>
+      <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
+    </div>
+  </footer>
 </body>
 </html>
