@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram Photo Downloader - Save Insta Images in HD | InstaDL</title>
+
+  <!-- ✅ Font -->
+  <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
+
+  <!-- ✅ Google AdSense Site-Wide Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Download Instagram photos in high resolution. Save Insta images, profile pics, or photo posts without watermark. No login required." />
+  <meta name="keywords" content="Instagram photo downloader, save insta pics, HD Instagram image download, download IG photo, Instagram image grabber, no watermark" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.instadl.org/photo.html" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Tailwind & AlpineJS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin-top: 160px; }
+    .fade-in { animation: fadeIn 1.2s ease-in both; }
+    .slide-up { animation: slideUp 1.2s ease-out both; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- 🔝 Top Navbar -->
+<nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+  <div class="flex items-center gap-2">
+    <img src="/logo.png" alt="InstaDL logo" class="h-6 w-auto" />
+  </div>
+  <div class="flex gap-6 text-sm text-gray-700">
+    <a href="#" class="hover:text-pink-500">FAQ</a>
+    <a href="#" class="hover:text-pink-500">EN ▼</a>
+  </div>
+</nav>
+
+<!-- 💡 Feature Bar -->
+<div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
+  <a href="/video.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Video</a>
+  <a href="/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">Photo</a>
+  <a href="/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Reels</a>
+  <a href="/story.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Story</a>
+  <a href="/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">IGTV</a>
+  <a href="/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carousel</a>
+  <a href="/viewer.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Viewer</a>
+</div>
+
+<!-- 🔽 Hero Section -->
+<section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
+  <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
+    <h1 class="text-5xl font-extrabold mb-4 leading-tight text-white drop-shadow-xl">
+      <span class="inline-block text-white">Instagram</span>
+      <span class="inline-block text-yellow-300">Photo Downloader</span>
+    </h1>
+    <p class="text-lg mb-6 text-white/90">
+      <span class="block">Save <span class="text-yellow-200 font-semibold">Insta Images</span> in crystal-clear HD</span>
+      <span class="block text-white/80 text-sm mt-1">No watermark. No login needed.</span>
+    </p>
+
+    <!-- 🧊 Glass Form -->
+    <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
+      <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+        loading = true;
+        fetch('/api/download', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: $refs.urlInput.value })
+        })
+        .then(res => res.json())
+        .then(data => {
+          result = data;
+          loading = false;
+          error = '';
+          fetch('/api/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
+          });
+          if (data.download_url) {
+            const link = document.createElement('a');
+            link.href = data.download_url;
+            link.download = '';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        })
+        .catch(() => {
+          error = 'Failed to fetch image.';
+          loading = false;
+        });">
+
+        <div class="flex flex-col sm:flex-row w-full gap-2">
+          <input 
+            type="text" 
+            placeholder="Paste Instagram photo URL here"
+            x-ref="urlInput"
+            class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500"
+          />
+          <button 
+            type="button"
+            class="bg-white text-gray-800 border border-gray-300 px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition"
+            @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
+            Paste
+          </button>
+        </div>
+        <button 
+          type="submit"
+          class="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white shadow-md hover:shadow-xl transition-all duration-300 py-3 px-6 rounded-lg w-full sm:w-auto font-semibold text-sm">
+          Download
+        </button>
+      </form>
+
+      <div class="mt-4 text-sm text-white/90" x-show="loading">Fetching image link...</div>
+      <template x-if="error">
+        <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
+      </template>
+      <template x-if="result && result.download_url">
+        <div class="mt-6 text-center slide-up">
+          <template x-if="result.thumbnail">
+            <img :src="result.thumbnail" alt="Image preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
+          </template>
+          <template x-if="!result.thumbnail">
+            <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
+              <span class="text-sm">No preview available</span>
+            </div>
+          </template>
+          <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition">
+            Download Photo
+          </a>
+        </div>
+      </template>
+      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram photos are supported. Private or expired content won't work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
+  <div class="max-w-5xl mx-auto text-center space-y-4">
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/video.html" class="hover:text-white">Video</a>
+      <a href="/photo.html" class="hover:text-white font-semibold text-white">Photo</a>
+      <a href="/reels.html" class="hover:text-white">Reels</a>
+      <a href="/story.html" class="hover:text-white">Story</a>
+      <a href="/igtv.html" class="hover:text-white">IGTV</a>
+      <a href="/carousel.html" class="hover:text-white">Carousel</a>
+      <a href="/viewer.html" class="hover:text-white">Viewer</a>
+      <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+    </div>
+    <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
