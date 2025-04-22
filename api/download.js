@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 🔁 Step 1: Attempt via RapidAPI
+    // Always try RapidAPI first
     const rapid = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
       method: 'GET',
       headers: {
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
     const mediaItems = rapidData?.media || [];
 
-    const validatedRapid = await Promise.all(
+    const validated = await Promise.all(
       mediaItems.map(async (item) => {
         try {
           const head = await fetch(item.url, { method: 'HEAD' });
@@ -35,50 +35,42 @@ export default async function handler(req, res) {
             media_type: type.includes('video') ? 'video' : 'image',
             thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
           };
-        } catch (e) {
-          console.warn('⚠️ Failed to validate media item:', e);
+        } catch {
           return null;
         }
       })
     );
 
-    const filteredRapid = validatedRapid.filter(Boolean);
-    const allImages = filteredRapid.every(item => item.media_type === 'image');
-    const isLikelyCarousel = filteredRapid.length > 1;
+    const filtered = validated.filter(Boolean);
 
-    // 🌀 Step 2: Fallback to Apify if RapidAPI returns only images and it's a carousel
-    if (allImages && isLikelyCarousel) {
-      console.log('🌀 Fallback to Apify for possible carousel videos...');
-      const apify = await fetch('https://api.apify.com/v2/actor-tasks/tmckee09~carousel-extractor-task/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ startUrls: [url] })
-      });
-
-      const apifyData = await apify.json();
-      console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
-
-      const items = Array.isArray(apifyData) ? apifyData : apifyData.items || [];
-
-      const results = items.map(item => ({
-        url: item.downloadUrl,
-        media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
-        thumbnail: item.thumbnailUrl || item.downloadUrl,
-      }));
-
-      if (!results.length) {
-        return res.status(404).json({ message: 'No files found via Apify', files: [], apifyData });
-      }
-
-      return res.status(200).json({ files: results });
+    // If RapidAPI gave us valid media, return it — no need for Apify
+    if (filtered.length) {
+      return res.status(200).json({ files: filtered });
     }
 
-    // ✅ Step 3: Use RapidAPI result if valid
-    if (filteredRapid.length) {
-      return res.status(200).json({ files: filteredRapid });
+    // Otherwise, fall back to Apify
+    console.log('🌀 Falling back to Apify...');
+    const apify = await fetch('https://api.apify.com/v2/actor-tasks/tmckee09~carousel-extractor-task/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ startUrls: [url] }) // ✅ FIXED: pass array of strings
+    });
+
+    const apifyData = await apify.json();
+    console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
+    const items = Array.isArray(apifyData) ? apifyData : apifyData.items || [];
+
+    const results = items.map(item => ({
+      url: item.downloadUrl,
+      media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
+      thumbnail: item.thumbnailUrl || item.downloadUrl,
+    }));
+
+    if (!results.length) {
+      return res.status(404).json({ message: 'No files found via Apify', files: [], apifyData });
     }
 
-    return res.status(404).json({ message: 'No media found', files: [] });
+    return res.status(200).json({ files: results });
 
   } catch (err) {
     console.error('❌ Download handler error:', err);
