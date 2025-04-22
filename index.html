@@ -24,6 +24,7 @@
 
   <style>
     html { scroll-behavior: smooth; }
+    body { padding-top: 160px; }
     .fade-in { animation: fadeIn 1.2s ease-in both; }
     .slide-up { animation: slideUp 1.2s ease-out both; }
     @keyframes fadeIn {
@@ -38,23 +39,19 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  
- <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
-  <!-- Logo -->
+<!-- 🔝 Top Navbar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
   <div class="flex items-center gap-2">
     <img src="/logo.png" alt="InstaDL logo" class="h-6 w-auto" />
   </div>
-  <!-- Right-side links -->
   <div class="flex gap-6 text-sm text-gray-700">
     <a href="#" class="hover:text-pink-500">FAQ</a>
     <a href="#" class="hover:text-pink-500">EN ▼</a>
   </div>
 </nav>
 
-
-#
-  <!-- Floating Feature Bar -->
-<div class="fixed top-[72px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
+<!-- 💡 Floating Feature Bar -->
+<div class="fixed top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
   <a href="#video" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">
     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M10 16.5l6-4.5-6-4.5v9z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
     Video
