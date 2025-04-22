@@ -10,7 +10,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Always try RapidAPI first
     const rapid = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
       method: 'GET',
       headers: {
@@ -43,34 +42,11 @@ export default async function handler(req, res) {
 
     const filtered = validated.filter(Boolean);
 
-    // If RapidAPI gave us valid media, return it — no need for Apify
-    if (filtered.length) {
-      return res.status(200).json({ files: filtered });
+    if (!filtered.length) {
+      return res.status(404).json({ message: 'No valid media found' });
     }
 
-    // Otherwise, fall back to Apify
-    console.log('🌀 Falling back to Apify...');
-    const apify = await fetch('https://api.apify.com/v2/actor-tasks/tmckee09~carousel-extractor-task/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ startUrls: [url] }) // ✅ FIXED: pass array of strings
-    });
-
-    const apifyData = await apify.json();
-    console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
-    const items = Array.isArray(apifyData) ? apifyData : apifyData.items || [];
-
-    const results = items.map(item => ({
-      url: item.downloadUrl,
-      media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
-      thumbnail: item.thumbnailUrl || item.downloadUrl,
-    }));
-
-    if (!results.length) {
-      return res.status(404).json({ message: 'No files found via Apify', files: [], apifyData });
-    }
-
-    return res.status(200).json({ files: results });
+    return res.status(200).json({ files: filtered });
 
   } catch (err) {
     console.error('❌ Download handler error:', err);
