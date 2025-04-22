@@ -57,7 +57,9 @@ export default async function handler(req, res) {
       const apifyData = await apify.json();
       console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
 
-      const results = (apifyData || []).map(item => ({
+      const items = Array.isArray(apifyData) ? apifyData : apifyData.items || [];
+
+      const results = items.map(item => ({
         url: item.downloadUrl,
         media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
         thumbnail: item.thumbnailUrl || item.downloadUrl,
