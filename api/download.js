@@ -10,7 +10,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
+    // Primary API (RapidAPI)
+    const rapid = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
       method: 'GET',
       headers: {
         'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
@@ -18,71 +19,62 @@ export default async function handler(req, res) {
       },
     });
 
-    const data = await response.json();
-    const mediaItems = data?.media || [];
+    const rapidData = await rapid.json();
+    const mediaItems = rapidData?.media || [];
 
-    if (!Array.isArray(mediaItems) || mediaItems.length === 0) {
-      return res.status(404).json({
-        error: true,
-        message: 'No downloadable media found',
-        files: []
-      });
-    }
-
-    const validatedFiles = await Promise.all(
+    const validatedRapid = await Promise.all(
       mediaItems.map(async (item) => {
         try {
-          const headRes = await fetch(item.url, { method: 'HEAD' });
-          const contentType = headRes.headers.get('content-type');
-          if (!contentType || (!contentType.includes('image') && !contentType.includes('video'))) {
-            return null;
-          }
-
-          const mediaType = contentType.includes('video') ? 'video' : 'image';
-          let thumbnail = null;
-
-          if (mediaType === 'image') {
-            thumbnail = item.url;
-          } else if (item.thumbnail) {
-            try {
-              const thumbRes = await fetch(item.thumbnail, { method: 'HEAD' });
-              const thumbType = thumbRes.headers.get('content-type');
-              if (thumbType && thumbType.includes('image')) {
-                thumbnail = item.thumbnail;
-              }
-            } catch (err) {
-              console.warn('Thumbnail validation failed:', err);
-            }
-          }
+          const head = await fetch(item.url, { method: 'HEAD' });
+          const type = head.headers.get('content-type');
+          if (!type || (!type.includes('image') && !type.includes('video'))) return null;
 
           return {
             url: item.url,
-            media_type: mediaType,
-            thumbnail
+            media_type: type.includes('video') ? 'video' : 'image',
+            thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
           };
-        } catch (e) {
-          console.warn('Failed to validate media item:', e);
+        } catch {
           return null;
         }
       })
     );
 
-    const filtered = validatedFiles.filter(Boolean);
+    const filteredRapid = validatedRapid.filter(Boolean);
+    const allImages = filteredRapid.every(item => item.media_type === 'image');
+    const isLikelyCarousel = filteredRapid.length > 1;
 
-    if (filtered.length === 0) {
-      return res.status(415).json({
-        error: true,
-        message: 'No valid media files',
-        files: []
+    if (allImages && isLikelyCarousel) {
+      console.log('🌀 Fallback to Apify for carousel videos...');
+      const apify = await fetch('https://api.apify.com/v2/actor-tasks/epctex~instagram-video-downloader/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ startUrls: [{ url }] })
       });
+
+      const apifyData = await apify.json();
+
+      const results = (apifyData || []).map(item => ({
+        url: item.downloadUrl,
+        media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
+        thumbnail: item.thumbnailUrl || item.downloadUrl,
+      }));
+
+      if (!results.length) {
+        return res.status(404).json({ message: 'No files found via Apify', files: [] });
+      }
+
+      return res.status(200).json({ files: results });
     }
 
-    return res.status(200).json({
-      files: filtered
-    });
+    if (filteredRapid.length) {
+      return res.status(200).json({ files: filteredRapid });
+    }
+
+    return res.status(404).json({ message: 'No media found', files: [] });
 
   } catch (err) {
-    console.error('RapidAPI error:', err);
-    res.status(500).json({ message: 'Failed to fetch download data' });
+    console.error('Download handler error:', err);
+    return res.status(500).json({ message: 'Something went wrong' });
   }
 }
