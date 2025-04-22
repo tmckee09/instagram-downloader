@@ -20,6 +20,7 @@ export default async function handler(req, res) {
     });
 
     const rapidData = await rapid.json();
+    console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
     const mediaItems = rapidData?.media || [];
 
     const validatedRapid = await Promise.all(
@@ -34,7 +35,8 @@ export default async function handler(req, res) {
             media_type: type.includes('video') ? 'video' : 'image',
             thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
           };
-        } catch {
+        } catch (e) {
+          console.warn('⚠️ Failed to validate media item:', e);
           return null;
         }
       })
@@ -53,6 +55,7 @@ export default async function handler(req, res) {
       });
 
       const apifyData = await apify.json();
+      console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
 
       const results = (apifyData || []).map(item => ({
         url: item.downloadUrl,
