@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram Video Downloader - Save HD Videos from Instagram | InstaDL</title>
+  <title>Instagram Reels Downloader - Save HD Reels | InstaDL</title>
 
   <!-- ✅ Font -->
   <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
@@ -12,10 +12,10 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Download high-definition Instagram videos easily. Save Insta vids, clips, or full posts without watermarks. No sign-in needed!" />
-  <meta name="keywords" content="Instagram video downloader, save insta videos, HD video IG download, download IG clip, no watermark, Insta reel saver, Instagram vid download tool" />
+  <meta name="description" content="Download high-quality Instagram Reels with no watermark. Save Instagram Reels in HD format easily on mobile or desktop." />
+  <meta name="keywords" content="Instagram Reels downloader, save insta reels, HD reels IG download, download IG reels, no watermark, Insta reel saver, Reels download tool" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.instadl.org/video.html" />
+  <link rel="canonical" href="https://www.instadl.org/reels.html" />
   <link rel="icon" href="/favicon.ico" />
 
   <!-- Tailwind & AlpineJS -->
@@ -52,9 +52,9 @@
 
 <!-- 💡 Feature Bar -->
 <div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
-  <a href="/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">Video</a>
+  <a href="/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Video</a>
   <a href="/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Photo</a>
-  <a href="/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Reels</a>
+  <a href="/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">Reels</a>
   <a href="/story.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Story</a>
   <a href="/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">IGTV</a>
   <a href="/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carousel</a>
@@ -66,15 +66,16 @@
   <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
     <h1 class="text-5xl font-extrabold mb-4 leading-tight text-white drop-shadow-xl">
       <span class="inline-block text-white">Instagram</span>
-      <span class="inline-block text-yellow-300">Video Downloader</span>
+      <span class="inline-block text-yellow-300">Reels Downloader</span>
     </h1>
     <p class="text-lg mb-6 text-white/90">
-      <span class="block">Save <span class="text-yellow-200 font-semibold">Insta Videos</span> in crystal-clear HD</span>
-      <span class="block text-white/80 text-sm mt-1">No watermarks. No account login required.</span>
+      <span class="block">Download <span class="text-yellow-200 font-semibold">Instagram Reels</span> in full HD</span>
+      <span class="block text-white/80 text-sm mt-1">Completely free. No watermark. No login needed.</span>
     </p>
 
     <!-- 🧊 Glass Form -->
     <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
+      <!-- Reusing Alpine.js & API logic -->
       <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
         loading = true;
         fetch('/api/download', {
@@ -102,14 +103,14 @@
           }
         })
         .catch(() => {
-          error = 'Failed to fetch video.';
+          error = 'Failed to fetch reel.';
           loading = false;
         });">
 
         <div class="flex flex-col sm:flex-row w-full gap-2">
           <input 
             type="text" 
-            placeholder="Paste Instagram video URL here"
+            placeholder="Paste Instagram Reels URL here"
             x-ref="urlInput"
             class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500"
           />
@@ -127,14 +128,14 @@
         </button>
       </form>
 
-      <div class="mt-4 text-sm text-white/90" x-show="loading">Fetching video link...</div>
+      <div class="mt-4 text-sm text-white/90" x-show="loading">Fetching reel link...</div>
       <template x-if="error">
         <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
       </template>
       <template x-if="result && result.download_url">
         <div class="mt-6 text-center slide-up">
           <template x-if="result.thumbnail">
-            <img :src="result.thumbnail" alt="Video preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
+            <img :src="result.thumbnail" alt="Reel preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
           </template>
           <template x-if="!result.thumbnail">
             <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
@@ -142,11 +143,11 @@
             </div>
           </template>
           <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition">
-            Download Video
+            Download Reel
           </a>
         </div>
       </template>
-      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram videos are supported. Private or expired content won't work.</p>
+      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram Reels are supported. Private or expired posts cannot be downloaded.</p>
     </div>
   </div>
 </section>
