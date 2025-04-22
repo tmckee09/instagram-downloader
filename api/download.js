@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
     if (allImages && isLikelyCarousel) {
       console.log('🌀 Fallback to Apify for carousel videos...');
-      const apify = await fetch('https://api.apify.com/v2/actor-tasks/epctex~instagram-video-downloader/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
+      const apify = await fetch('https://api.apify.com/v2/actor-tasks/tmckee09~carousel-extractor-task/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ startUrls: [{ url }] })
@@ -57,15 +57,15 @@ export default async function handler(req, res) {
       const apifyData = await apify.json();
       console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
 
-      if (!Array.isArray(apifyData) || apifyData.length === 0) {
-        return res.status(404).json({ message: 'No files found via Apify', files: [], apifyData });
-      }
-
-      const results = apifyData.map(item => ({
+      const results = (apifyData || []).map(item => ({
         url: item.downloadUrl,
         media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
         thumbnail: item.thumbnailUrl || item.downloadUrl,
       }));
+
+      if (!results.length) {
+        return res.status(404).json({ message: 'No files found via Apify', files: [], apifyData });
+      }
 
       return res.status(200).json({ files: results });
     }
@@ -78,6 +78,6 @@ export default async function handler(req, res) {
 
   } catch (err) {
     console.error('Download handler error:', err);
-    return res.status(500).json({ message: 'Something went wrong', error: err.message });
+    return res.status(500).json({ message: 'Something went wrong' });
   }
 }
