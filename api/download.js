@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Primary API (RapidAPI)
+    // 🔁 Step 1: Attempt via RapidAPI
     const rapid = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
       method: 'GET',
       headers: {
@@ -46,8 +46,9 @@ export default async function handler(req, res) {
     const allImages = filteredRapid.every(item => item.media_type === 'image');
     const isLikelyCarousel = filteredRapid.length > 1;
 
+    // 🌀 Step 2: Fallback to Apify if RapidAPI returns only images and it's a carousel
     if (allImages && isLikelyCarousel) {
-      console.log('🌀 Fallback to Apify for carousel videos...');
+      console.log('🌀 Fallback to Apify for possible carousel videos...');
       const apify = await fetch('https://api.apify.com/v2/actor-tasks/tmckee09~carousel-extractor-task/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -72,6 +73,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ files: results });
     }
 
+    // ✅ Step 3: Use RapidAPI result if valid
     if (filteredRapid.length) {
       return res.status(200).json({ files: filteredRapid });
     }
@@ -79,7 +81,7 @@ export default async function handler(req, res) {
     return res.status(404).json({ message: 'No media found', files: [] });
 
   } catch (err) {
-    console.error('Download handler error:', err);
+    console.error('❌ Download handler error:', err);
     return res.status(500).json({
       message: 'Something went wrong',
       error: err.message || err.toString()
