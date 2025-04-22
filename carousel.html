@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram Carousel Downloader - Save Multi-Image Posts | InstaDL</title>
+  <title>Instagram Carousel Downloader - Download All Images & Videos | InstaDL</title>
 
   <!-- ✅ Font -->
   <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
@@ -12,8 +12,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Download Instagram carousels and multi-image posts in high definition. Fast, watermark-free, and works on all devices." />
-  <meta name="keywords" content="Instagram carousel downloader, save IG carousels, download Instagram album, multi-image Instagram post download, no watermark carousel IG" />
+  <meta name="description" content="Download Instagram carousels with all images and videos in high quality. Supports multi-posts, albums, and more." />
+  <meta name="keywords" content="Instagram carousel downloader, IG album downloader, save Instagram carousels, download all IG images, Instagram post download, multi-image video Instagram" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.instadl.org/carousel.html" />
   <link rel="icon" href="/favicon.ico" />
@@ -69,8 +69,8 @@
       <span class="inline-block text-yellow-300">Carousel Downloader</span>
     </h1>
     <p class="text-lg mb-6 text-white/90">
-      <span class="block">Save <span class="text-yellow-200 font-semibold">Multi-Image Instagram Posts</span> with ease</span>
-      <span class="block text-white/80 text-sm mt-1">Instant download. No watermark. No account required.</span>
+      <span class="block">Download <span class="text-yellow-200 font-semibold">all images and videos</span> in Instagram carousels</span>
+      <span class="block text-white/80 text-sm mt-1">Watermark-free. No sign-in. Mobile-friendly.</span>
     </p>
 
     <!-- 🧊 Glass Form -->
@@ -87,19 +87,6 @@
           result = data;
           loading = false;
           error = '';
-          fetch('/api/track', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
-          });
-          if (data.download_url) {
-            const link = document.createElement('a');
-            link.href = data.download_url;
-            link.download = '';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
         })
         .catch(() => {
           error = 'Failed to fetch carousel.';
@@ -127,26 +114,27 @@
         </button>
       </form>
 
-      <div class="mt-4 text-sm text-white/90" x-show="loading">Fetching carousel link...</div>
+      <div class="mt-4 text-sm text-white/90" x-show="loading">Fetching carousel...</div>
       <template x-if="error">
         <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
       </template>
-      <template x-if="result && result.download_url">
-        <div class="mt-6 text-center slide-up">
-          <template x-if="result.thumbnail">
-            <img :src="result.thumbnail" alt="Carousel preview" class="rounded mb-3 w-full max-h-64 object-cover shadow-md">
-          </template>
-          <template x-if="!result.thumbnail">
-            <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed border-gray-400 rounded mb-3">
-              <span class="text-sm">No preview available</span>
+
+      <template x-if="result && result.files">
+        <div class="mt-6 grid gap-6 md:grid-cols-2 slide-up">
+          <template x-for="(file, idx) in result.files" :key="idx">
+            <div class="bg-white/10 p-4 rounded-xl shadow-md">
+              <template x-if="file.thumbnail">
+                <img :src="file.thumbnail" alt="Carousel item preview" class="rounded mb-3 w-full max-h-64 object-cover">
+              </template>
+              <a :href="file.url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition w-full text-center mt-2">
+                <span x-text="file.media_type === 'video' ? 'Download Video' : 'Download Image'"></span>
+              </a>
             </div>
           </template>
-          <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition">
-            Download Carousel
-          </a>
         </div>
       </template>
-      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram carousels are supported. Private or expired content cannot be downloaded.</p>
+
+      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram carousels are supported. Private or expired content won’t work.</p>
     </div>
   </div>
 </section>
