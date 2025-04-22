@@ -57,15 +57,15 @@ export default async function handler(req, res) {
       const apifyData = await apify.json();
       console.log('📦 Apify response:', JSON.stringify(apifyData, null, 2));
 
-      const results = (apifyData || []).map(item => ({
+      if (!Array.isArray(apifyData) || apifyData.length === 0) {
+        return res.status(404).json({ message: 'No files found via Apify', files: [], apifyData });
+      }
+
+      const results = apifyData.map(item => ({
         url: item.downloadUrl,
         media_type: item.downloadUrl.includes('.mp4') ? 'video' : 'image',
         thumbnail: item.thumbnailUrl || item.downloadUrl,
       }));
-
-      if (!results.length) {
-        return res.status(404).json({ message: 'No files found via Apify', files: [] });
-      }
 
       return res.status(200).json({ files: results });
     }
@@ -78,6 +78,6 @@ export default async function handler(req, res) {
 
   } catch (err) {
     console.error('Download handler error:', err);
-    return res.status(500).json({ message: 'Something went wrong' });
+    return res.status(500).json({ message: 'Something went wrong', error: err.message });
   }
 }
