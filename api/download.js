@@ -52,7 +52,7 @@ export default async function handler(req, res) {
       const apify = await fetch('https://api.apify.com/v2/actor-tasks/tmckee09~carousel-extractor-task/run-sync-get-dataset-items?token=apify_api_14X6dIzJvOtUWvWUivqwn9esXAeeQF1XtTGU', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ startUrls: [{ url }] })
+        body: JSON.stringify({ startUrls: [url] })
       });
 
       const apifyData = await apify.json();
