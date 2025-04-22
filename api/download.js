@@ -19,55 +19,70 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    const file = data?.media?.[0];
+    const mediaItems = data?.media || [];
 
-    if (!file?.url) {
+    if (!Array.isArray(mediaItems) || mediaItems.length === 0) {
       return res.status(404).json({
         error: true,
         message: 'No downloadable media found',
-        thumbnail: null,
-        download_url: null
+        files: []
       });
     }
 
-// ✅ Validate main download URL
-const headRes = await fetch(file.url, { method: 'HEAD' });
-const type = headRes.headers.get('content-type');
-if (!type || (!type.includes('image') && !type.includes('video'))) {
-  return res.status(415).json({
-    error: true,
-    message: 'Download URL is not a valid media file',
-    thumbnail: null,
-    download_url: null
-  });
-}
+    const validatedFiles = await Promise.all(
+      mediaItems.map(async (item) => {
+        try {
+          const headRes = await fetch(item.url, { method: 'HEAD' });
+          const contentType = headRes.headers.get('content-type');
+          if (!contentType || (!contentType.includes('image') && !contentType.includes('video'))) {
+            return null;
+          }
 
-const mediaType = type.includes('video') ? 'video' : 'image';
+          const mediaType = contentType.includes('video') ? 'video' : 'image';
+          let thumbnail = null;
 
-// ✅ Use download URL as fallback thumbnail if it's an image
-let thumbnail = null;
-if (mediaType === 'image') {
-  thumbnail = file.url;
-} else if (file.thumbnail) {
-  try {
-    const thumbRes = await fetch(file.thumbnail, { method: 'HEAD' });
-    const thumbType = thumbRes.headers.get('content-type');
-    if (thumbType && thumbType.includes('image')) {
-      thumbnail = file.thumbnail;
+          if (mediaType === 'image') {
+            thumbnail = item.url;
+          } else if (item.thumbnail) {
+            try {
+              const thumbRes = await fetch(item.thumbnail, { method: 'HEAD' });
+              const thumbType = thumbRes.headers.get('content-type');
+              if (thumbType && thumbType.includes('image')) {
+                thumbnail = item.thumbnail;
+              }
+            } catch (err) {
+              console.warn('Thumbnail validation failed:', err);
+            }
+          }
+
+          return {
+            url: item.url,
+            media_type: mediaType,
+            thumbnail
+          };
+        } catch (e) {
+          console.warn('Failed to validate media item:', e);
+          return null;
+        }
+      })
+    );
+
+    const filtered = validatedFiles.filter(Boolean);
+
+    if (filtered.length === 0) {
+      return res.status(415).json({
+        error: true,
+        message: 'No valid media files',
+        files: []
+      });
     }
-  } catch (err) {
-    console.warn('Thumbnail validation failed:', err);
-  }
-}
 
-return res.status(200).json({
-  thumbnail,
-  download_url: file.url,
-  media_type: mediaType
-});
+    return res.status(200).json({
+      files: filtered
+    });
+
   } catch (err) {
     console.error('RapidAPI error:', err);
     res.status(500).json({ message: 'Failed to fetch download data' });
   }
 }
-
