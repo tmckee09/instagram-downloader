@@ -35,9 +35,41 @@
       0% { transform: translateY(30px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
+    .floating-ad {
+      position: fixed;
+      top: 120px;
+      width: 160px;
+      height: auto;
+      z-index: 9999;
+    }
+    .floating-ad-left { left: 10px; }
+    .floating-ad-right { right: 10px; }
+    @media (max-width: 1024px) {
+      .floating-ad { display: none; }
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+
+<!-- Floating Side Ads -->
+<div class="floating-ad floating-ad-left">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2035725815108237"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<div class="floating-ad floating-ad-right">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2035725815108237"
+       data-ad-slot="0987654321"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
 <!-- 🔝 Top Navbar -->
 <nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
@@ -59,7 +91,6 @@
   <a href="/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">IGTV</a>
   <a href="/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carousel</a>
 </div>
-
 
 <!-- 🔽 Hero Section -->
 <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
