@@ -39,9 +39,44 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .floating-ad {
+      position: fixed;
+      top: 140px;
+      width: 160px;
+      z-index: 50;
+    }
+    .floating-ad-left {
+      left: 10px;
+    }
+    .floating-ad-right {
+      right: 10px;
+    }
+    @media (max-width: 1024px) {
+      .floating-ad { display: none; }
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 leading-relaxed tracking-wide">
+
+  <!-- Floating Side Ads -->
+  <div class="floating-ad floating-ad-left">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2035725815108237"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="floating-ad floating-ad-right">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2035725815108237"
+         data-ad-slot="0987654321"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
 
   <header class="bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-400 text-white py-10 px-6 text-center fade-in">
     <h1 class="text-4xl font-bold">FAQ</h1>
@@ -57,40 +92,40 @@
       <div class="max-w-3xl mx-auto text-left">
         <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Frequently Asked Questions</h2>
 
-        <div class="space-y-6 text-gray-700">
-          <div>
-            <h3 class="text-xl font-semibold">How do I download Instagram Reels without watermark?</h3>
-            <p class="mt-1">Just paste the link into InstaDL.org and download your Reel instantly in HD with no watermark.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">Can I download Instagram Stories anonymously?</h3>
-            <p class="mt-1">Yes. InstaDL allows you to view and download public Stories without logging in or signing up.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">What Instagram content can I download?</h3>
-            <p class="mt-1">You can download Reels, Videos, Photos, IGTV, Stories, and Carousels from public accounts.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">Is InstaDL free to use?</h3>
-            <p class="mt-1">Absolutely. It’s 100% free, fast, and requires no account or login.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">Do I need to install an app or extension?</h3>
-            <p class="mt-1">No. InstaDL works directly in your browser – no software, no installation, no hassle.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">Can I use InstaDL on my phone?</h3>
-            <p class="mt-1">Yes! InstaDL is fully responsive and works perfectly on iOS and Android devices.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">Does InstaDL support Instagram carousel posts?</h3>
-            <p class="mt-1">Yes. You can download all images and videos from a carousel with a single paste.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">Why can't I download private content?</h3>
-            <p class="mt-1">InstaDL only supports public Instagram content. Private accounts are restricted by Instagram's privacy policies.</p>
-          </div>
-        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-700">
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">How do I download Instagram Reels without watermark?</h3>
+    <p class="text-sm">Just paste the link into InstaDL.org and download your Reel instantly in HD with no watermark.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">Can I download Instagram Stories anonymously?</h3>
+    <p class="text-sm">Yes. InstaDL allows you to view and download public Stories without logging in or signing up.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">What Instagram content can I download?</h3>
+    <p class="text-sm">You can download Reels, Videos, Photos, IGTV, Stories, and Carousels from public accounts.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">Is InstaDL free to use?</h3>
+    <p class="text-sm">Absolutely. It’s 100% free, fast, and requires no account or login.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">Do I need to install an app or extension?</h3>
+    <p class="text-sm">No. InstaDL works directly in your browser – no software, no installation, no hassle.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">Can I use InstaDL on my phone?</h3>
+    <p class="text-sm">Yes! InstaDL is fully responsive and works perfectly on iOS and Android devices.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">Does InstaDL support Instagram carousel posts?</h3>
+    <p class="text-sm">Yes. You can download all images and videos from a carousel with a single paste.</p>
+  </div>
+  <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <h3 class="text-lg font-semibold text-pink-600 mb-2">Why can't I download private content?</h3>
+    <p class="text-sm">InstaDL only supports public Instagram content. Private accounts are restricted by Instagram's privacy policies.</p>
+  </div>
+</div>
       </div>
     </section>
 
