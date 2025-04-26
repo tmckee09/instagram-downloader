@@ -142,6 +142,10 @@
       <!-- Input Form Glass Box -->
       <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
         <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+          gtag('event', 'download_attempt', {
+  event_category: 'Engagement',
+  event_label: 'Download Form Submitted'
+});
           loading = true;
           fetch('/api/download', {
             method: 'POST',
@@ -181,7 +185,11 @@
             <button 
   type="button"
   class="bg-white text-gray-800 border border-gray-300 px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition-all duration-200 tracking-wide shadow-sm flex items-center justify-center"
-  @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
+  @click="gtag('event', 'click_paste', {
+  event_category: 'Interaction',
+  event_label: 'Paste Button'
+});
+  navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
   Paste
 </button>
           </div>
