@@ -9,37 +9,61 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Invalid Instagram URL' });
   }
 
+  const RAPIDAPI_URL = 'https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert';
+  const RAPIDAPI_HEADERS = {
+    'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
+    'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com',
+  };
+
+  async function fetchWithRetry(url, options, retries = 2) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+      return response;
+    } catch (error) {
+      if (retries > 0) {
+        console.warn(`⚠️ RapidAPI request failed. Retrying... (${retries} left)`);
+        return await fetchWithRetry(url, options, retries - 1);
+      } else {
+        throw error;
+      }
+    }
+  }
+
   try {
-    const rapid = await fetch(`https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(url)}`, {
+    const rapid = await fetchWithRetry(`${RAPIDAPI_URL}?url=${encodeURIComponent(url)}`, {
       method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
-        'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com'
-      },
+      headers: RAPIDAPI_HEADERS,
     });
 
     const rapidData = await rapid.json();
     console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
+
     const mediaItems = rapidData?.media || [];
 
-    const validated = await Promise.all(
-      mediaItems.map(async (item) => {
-        try {
-          const head = await fetch(item.url, { method: 'HEAD' });
-          const type = head.headers.get('content-type');
-          if (!type || (!type.includes('image') && !type.includes('video'))) return null;
+    async function validateUrl(item) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
 
-          return {
-            url: item.url,
-            media_type: type.includes('video') ? 'video' : 'image',
-            thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
-          };
-        } catch {
-          return null;
-        }
-      })
-    );
+        const head = await fetch(item.url, { method: 'HEAD', signal: controller.signal });
+        clearTimeout(timeout);
 
+        const type = head.headers.get('content-type');
+        if (!type || (!type.includes('image') && !type.includes('video'))) return null;
+
+        return {
+          url: item.url,
+          media_type: type.includes('video') ? 'video' : 'image',
+          thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
+        };
+      } catch (error) {
+        console.warn('⚠️ Media validation failed:', item.url);
+        return null;
+      }
+    }
+
+    const validated = await Promise.all(mediaItems.map(validateUrl));
     const filtered = validated.filter(Boolean);
 
     if (!filtered.length) {
