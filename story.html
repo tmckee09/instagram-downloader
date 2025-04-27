@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Instagram Story Downloader - Save Stories in HD | InstaDL</title>
 
-  <!-- ✅ Font -->
+  <!-- Font -->
   <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
 
-  <!-- ✅ Google AdSense Site-Wide Script -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -48,25 +48,15 @@
 
 <!-- Floating Side Ads -->
 <div class="floating-ad floating-ad-left">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-2035725815108237"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2035725815108237" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 <div class="floating-ad floating-ad-right">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-2035725815108237"
-       data-ad-slot="0987654321"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2035725815108237" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- 🖑 Top Navbar -->
+<!-- Navbar -->
 <nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
   <div class="flex items-center gap-2">
     <img src="/logo.png" alt="InstaDL logo" class="h-6 w-auto" />
@@ -77,7 +67,7 @@
   </div>
 </nav>
 
-<!-- 💡 Feature Bar -->
+<!-- Feature Bar -->
 <div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
   <a href="/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Video</a>
   <a href="/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Photo</a>
@@ -87,19 +77,17 @@
   <a href="/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carousel</a>
 </div>
 
-<!-- 🕽️ Hero Section -->
+<!-- Hero Section -->
 <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
   <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
     <h1 class="text-5xl font-extrabold mb-4 leading-tight text-white drop-shadow-xl">
-      <span class="inline-block text-white">Instagram</span>
-      <span class="inline-block text-yellow-300">Story Downloader</span>
+      Instagram <span class="text-yellow-300">Story Downloader</span>
     </h1>
     <p class="text-lg mb-6 text-white/90">
-      <span class="block">Save <span class="text-yellow-200 font-semibold">Instagram Stories</span> in HD instantly</span>
-      <span class="block text-white/80 text-sm mt-1">No watermark. No login required. Free.</span>
+      Save <span class="text-yellow-200 font-semibold">Instagram Stories</span> in HD instantly. No watermark. No login required.
     </p>
 
-    <!-- 🦨 Glass Form -->
+    <!-- Form -->
     <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
       <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
         gtag('event', 'download_attempt', { event_category: 'Engagement', event_label: 'Download Form Submitted' });
@@ -111,9 +99,9 @@
         })
         .then(res => res.json())
         .then(data => {
-          const items = data.files || data.media || [];
-          if (items.length > 0) {
-            const firstFile = items[0];
+          const mediaItems = data.files || data.media || [];
+          if (mediaItems.length > 0) {
+            const firstFile = mediaItems[0];
             result = {
               download_url: firstFile.url,
               media_type: firstFile.media_type,
@@ -135,25 +123,15 @@
         .catch(() => {
           error = 'Failed to fetch story.';
           loading = false;
-        });
-      ">
+        });">
+
         <div class="flex flex-col sm:flex-row w-full gap-2">
-          <input 
-            type="text" 
-            placeholder="Paste Instagram Story URL here"
-            x-ref="urlInput"
-            class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500"
-          />
-          <button 
-            type="button"
-            class="bg-white text-gray-800 border border-gray-300 px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition"
-            @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
+          <input type="text" placeholder="Paste Instagram Story URL here" x-ref="urlInput" class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500" />
+          <button type="button" class="bg-white text-gray-800 border border-gray-300 px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition" @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">
             Paste
           </button>
         </div>
-        <button 
-          type="submit"
-          class="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white shadow-md hover:shadow-xl transition-all duration-300 py-3 px-6 rounded-lg w-full sm:w-auto font-semibold text-sm">
+        <button type="submit" class="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white shadow-md hover:shadow-xl transition-all duration-300 py-3 px-6 rounded-lg w-full sm:w-auto font-semibold text-sm">
           Download
         </button>
       </form>
@@ -181,16 +159,11 @@
     </div>
   </div>
 
-<!-- Google AdSense Inline Ad -->
-<div class="my-6 w-full">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-2035725815108237"
-       data-ad-slot="auto"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
+  <!-- AdSense Inline Ad -->
+  <div class="my-6 w-full">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2035725815108237" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
 </section>
 
 <!-- Footer -->
