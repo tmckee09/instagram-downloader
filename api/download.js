@@ -41,16 +41,26 @@ export default async function handler(req, res) {
 
     let mediaItems = [];
 
-    if (Array.isArray(rapidData.media) && rapidData.media.length > 0) {
+    // ⚡ Detect if it's a story (single media) vs regular post (media array)
+    if (Array.isArray(rapidData?.media)) {
       mediaItems = rapidData.media;
-    } else if (rapidData.download_url) {
-      // 🎯 If single download_url, treat it as a single media item
+    } else if (rapidData?.url) {
+      mediaItems = [{
+        url: rapidData.url,
+        thumbnail: rapidData.thumbnail || null,
+      }];
+    } else if (rapidData?.download_url) {
       mediaItems = [{
         url: rapidData.download_url,
         thumbnail: rapidData.thumbnail || null,
       }];
     }
 
+    if (!mediaItems.length) {
+      return res.status(404).json({ message: 'No valid media found' });
+    }
+
+    // 🔥 Validate the URLs (optional - but safer)
     async function validateUrl(item) {
       try {
         const controller = new AbortController();
