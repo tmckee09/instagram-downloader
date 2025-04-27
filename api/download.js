@@ -54,6 +54,7 @@ export default async function handler(req, res) {
 
     const mediaItems = rapidData?.media || [];
 
+    // 🔥 Updated Validator: fallback if HEAD fails
     async function validateUrl(item) {
       try {
         const controller = new AbortController();
@@ -63,7 +64,14 @@ export default async function handler(req, res) {
         clearTimeout(timeout);
 
         const type = head.headers.get('content-type');
-        if (!type || (!type.includes('image') && !type.includes('video'))) return null;
+        if (!type || (!type.includes('image') && !type.includes('video'))) {
+          // 🛡 fallback: still accept URL if type unknown
+          return {
+            url: item.url,
+            media_type: 'unknown',
+            thumbnail: item.thumbnail || null,
+          };
+        }
 
         return {
           url: item.url,
@@ -71,8 +79,14 @@ export default async function handler(req, res) {
           thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
         };
       } catch (error) {
-        console.warn('⚠️ Media validation failed:', item.url);
-        return null;
+        console.warn('⚠️ Media validation failed:', item.url, error.message || error.toString());
+
+        // 🛡 fallback: still accept URL if HEAD fails
+        return {
+          url: item.url,
+          media_type: 'unknown',
+          thumbnail: item.thumbnail || null,
+        };
       }
     }
 
