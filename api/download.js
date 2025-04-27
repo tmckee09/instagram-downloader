@@ -9,11 +9,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Invalid Instagram URL' });
   }
 
-  const RAPIDAPI_URL = 'https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert';
-  const RAPIDAPI_HEADERS = {
-    'X-RapidAPI-Key': 'YOUR-KEY-HERE',
-    'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com',
-  };
+ const RAPIDAPI_URL = 'https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert';
+const RAPIDAPI_HEADERS = {
+  'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa', // your actual working key
+  'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com',
+};
 
   async function fetchWithRetry(url, options, retries = 2) {
     try {
