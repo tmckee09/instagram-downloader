@@ -12,21 +12,20 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-01PYD112H4');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01PYD112H4');
+  </script>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Download Instagram Stories in high definition without watermark. Fast, secure, and free. No login required." />
-  <meta name="keywords" content="Instagram story downloader, save insta story, HD IG stories, download story no watermark, Insta story saver, download IG story" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.instadl.org/story.html" />
-  <link rel="icon" href="/favicon.ico" />
+  <meta name="description" content="Download Instagram Stories in high definition without watermark. Fast, secure, and free. No login required.">
+  <meta name="keywords" content="Instagram story downloader, save insta story, HD IG stories, download story no watermark, Insta story saver, download IG story">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.instadl.org/story.html">
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Tailwind & AlpineJS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -37,26 +36,12 @@
     body { margin-top: 160px; }
     .fade-in { animation: fadeIn 1.2s ease-in both; }
     .slide-up { animation: slideUp 1.2s ease-out both; }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes slideUp {
-      0% { transform: translateY(30px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-    .floating-ad {
-      position: fixed;
-      top: 120px;
-      width: 160px;
-      height: auto;
-      z-index: 9999;
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    .floating-ad { position: fixed; top: 120px; width: 160px; z-index: 9999; }
     .floating-ad-left { left: 10px; }
     .floating-ad-right { right: 10px; }
-    @media (max-width: 1024px) {
-      .floating-ad { display: none; }
-    }
+    @media (max-width: 1024px) { .floating-ad { display: none; } }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -111,12 +96,13 @@
     </h1>
     <p class="text-lg mb-6 text-white/90">
       <span class="block">Save <span class="text-yellow-200 font-semibold">Instagram Stories</span> in HD instantly</span>
-      <span class="block text-white/80 text-sm mt-1">Works on mobile & desktop. No watermark. No login required.</span>
+      <span class="block text-white/80 text-sm mt-1">No watermark. No login required. Free.</span>
     </p>
 
     <!-- 🧊 Glass Form -->
     <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
       <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+        gtag('event', 'download_attempt', { event_category: 'Engagement', event_label: 'Download Form Submitted' });
         loading = true;
         fetch('/api/download', {
           method: 'POST',
@@ -125,21 +111,24 @@
         })
         .then(res => res.json())
         .then(data => {
-          result = data;
-          loading = false;
-          error = '';
-          fetch('/api/track', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ success: !!data.download_url, url: $refs.urlInput.value })
-          });
-          if (data.download_url) {
+          if (data.files && data.files.length > 0) {
+            const firstFile = data.files[0];
+            result = {
+              download_url: firstFile.url,
+              media_type: firstFile.media_type,
+              thumbnail: firstFile.thumbnail
+            };
+            loading = false;
+            error = '';
             const link = document.createElement('a');
-            link.href = data.download_url;
+            link.href = result.download_url;
             link.download = '';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+          } else {
+            error = 'No downloadable stories found.';
+            loading = false;
           }
         })
         .catch(() => {
@@ -187,23 +176,21 @@
           </a>
         </div>
       </template>
-      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram Stories are supported. Private or expired content cannot be downloaded.</p>
+      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram Stories are supported. Private or expired stories cannot be downloaded.</p>
     </div>
   </div>
 
 <!-- Google AdSense Inline Ad -->
-    <div class="my-6 w-full">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-2035725815108237"
-           data-ad-slot="auto"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-   </section>
+  <div class="my-6 w-full">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2035725815108237"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</section>
 
 <!-- Footer -->
 <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
