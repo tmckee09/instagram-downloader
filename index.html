@@ -335,6 +335,66 @@
     </div>
   </footer>
 
+<!-- Temporary Debugger Inserted at Bottom -->
+<section id="debugger" class="py-12 px-6 bg-gray-200 text-gray-800">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-2xl font-bold mb-4">🛠️ Debugger Tool (Temporary)</h2>
+    <p class="mb-4 text-sm text-gray-600">Test your /api/download endpoint manually below. This section is temporary and should be removed before production.</p>
+    <div class="flex flex-col gap-4">
+      <input 
+        type="text" 
+        id="debug-url" 
+        placeholder="Paste Instagram URL here"
+        class="p-3 rounded-lg border border-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500"
+      />
+      <div class="flex gap-2 justify-center">
+        <button 
+          onclick="debugTestApi()"
+          class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded shadow">
+          Test API
+        </button>
+        <button 
+          onclick="clearDebugger()"
+          class="bg-gray-400 hover:bg-gray-500 text-white py-2 px-4 rounded shadow">
+          Clear Log
+        </button>
+      </div>
+      <pre id="debug-log" class="mt-6 text-left bg-black text-green-400 p-4 rounded overflow-x-auto h-64"></pre>
+    </div>
+  </div>
+</section>
+
+<script>
+function debugTestApi() {
+  const url = document.getElementById('debug-url').value.trim();
+  const log = document.getElementById('debug-log');
+  if (!url) {
+    log.textContent = '[Error] No URL entered.';
+    return;
+  }
+
+  log.textContent = '[Loading] Sending request...';
+
+  fetch('/api/download', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: url })
+  })
+  .then(response => response.json())
+  .then(data => {
+    log.textContent = '[Success] Response:\n' + JSON.stringify(data, null, 2);
+  })
+  .catch(error => {
+    log.textContent = '[Error] ' + error.message;
+  });
+}
+
+function clearDebugger() {
+  document.getElementById('debug-log').textContent = '';
+}
+</script>
+
+  
 </body>
 </html>
 </html>
