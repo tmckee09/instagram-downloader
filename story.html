@@ -66,7 +66,7 @@
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- 🔝 Top Navbar -->
+<!-- 🖑 Top Navbar -->
 <nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
   <div class="flex items-center gap-2">
     <img src="/logo.png" alt="InstaDL logo" class="h-6 w-auto" />
@@ -87,7 +87,7 @@
   <a href="/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carousel</a>
 </div>
 
-<!-- 🔽 Hero Section -->
+<!-- 🕽️ Hero Section -->
 <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
   <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
     <h1 class="text-5xl font-extrabold mb-4 leading-tight text-white drop-shadow-xl">
@@ -99,7 +99,7 @@
       <span class="block text-white/80 text-sm mt-1">No watermark. No login required. Free.</span>
     </p>
 
-    <!-- 🧊 Glass Form -->
+    <!-- 🦨 Glass Form -->
     <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
       <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
         gtag('event', 'download_attempt', { event_category: 'Engagement', event_label: 'Download Form Submitted' });
@@ -111,8 +111,9 @@
         })
         .then(res => res.json())
         .then(data => {
-          if (data.files && data.files.length > 0) {
-            const firstFile = data.files[0];
+          const items = data.files || data.media || [];
+          if (items.length > 0) {
+            const firstFile = items[0];
             result = {
               download_url: firstFile.url,
               media_type: firstFile.media_type,
