@@ -1,5 +1,3 @@
-// ✅ FULL corrected download.js
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
@@ -24,7 +22,7 @@ export default async function handler(req, res) {
       return response;
     } catch (error) {
       if (retries > 0) {
-        console.warn(`\u26a0\ufe0f RapidAPI request failed. Retrying... (${retries} left)`);
+        console.warn(`⚠️ RapidAPI request failed. Retrying... (${retries} left)`);
         return await fetchWithRetry(url, options, retries - 1);
       } else {
         throw error;
@@ -39,11 +37,10 @@ export default async function handler(req, res) {
     });
 
     const rapidData = await rapid.json();
-    console.log('\ud83d\udce6 RapidAPI response:', JSON.stringify(rapidData, null, 2));
+    console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
 
     let mediaItems = [];
 
-    // ✅ Smarter media array handling for Stories, Videos, Photos
     if (Array.isArray(rapidData?.media)) {
       mediaItems = rapidData.media;
     } else if (rapidData?.url) {
@@ -56,49 +53,17 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: 'No valid media found' });
     }
 
-    async function validateUrl(item) {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000);
+    // ⚡ No HEAD request – trust the URL
+    const formatted = mediaItems.map(item => ({
+      url: item.url,
+      media_type: item.url.includes('.mp4') ? 'video' : 'image',
+      thumbnail: item.thumbnail || null,
+    }));
 
-        const head = await fetch(item.url, { method: 'HEAD', signal: controller.signal });
-        clearTimeout(timeout);
-
-        const type = head.headers.get('content-type');
-        if (!type || (!type.includes('image') && !type.includes('video'))) {
-          return {
-            url: item.url,
-            media_type: 'unknown',
-            thumbnail: item.thumbnail || null,
-          };
-        }
-
-        return {
-          url: item.url,
-          media_type: type.includes('video') ? 'video' : 'image',
-          thumbnail: item.thumbnail || (type.includes('image') ? item.url : null),
-        };
-      } catch (error) {
-        console.warn('\u26a0\ufe0f Media validation failed:', item.url, error.message || error.toString());
-        return {
-          url: item.url,
-          media_type: 'unknown',
-          thumbnail: item.thumbnail || null,
-        };
-      }
-    }
-
-    const validated = await Promise.all(mediaItems.map(validateUrl));
-    const filtered = validated.filter(Boolean);
-
-    if (!filtered.length) {
-      return res.status(404).json({ message: 'No valid media found after validation' });
-    }
-
-    return res.status(200).json({ files: filtered });
+    return res.status(200).json({ files: formatted });
 
   } catch (err) {
-    console.error('\u274c Download handler error:', err);
+    console.error('❌ Download handler error:', err);
     return res.status(500).json({
       message: 'Something went wrong',
       error: err.message || err.toString()
