@@ -29,34 +29,36 @@ export default async function handler(req, res) {
     }
   }
 
-  try {
-    const rapid = await fetchWithRetry(`${RAPIDAPI_URL}?url=${encodeURIComponent(url)}`, {
-      method: 'GET',
-      headers: RAPIDAPI_HEADERS,
-    });
+ try {
+  const rapid = await fetchWithRetry(`${RAPIDAPI_URL}?url=${encodeURIComponent(url)}`, {
+    method: 'GET',
+    headers: RAPIDAPI_HEADERS,
+  });
 
-    const rapidData = await rapid.json();
-    console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
+  const rapidData = await rapid.json();
+  console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
 
-    const mediaItems = Array.isArray(rapidData?.media) ? rapidData.media : [];
+  const mediaItems = Array.isArray(rapidData?.media) ? rapidData.media : [];
 
-    if (!mediaItems.length) {
-      return res.status(404).json({ message: 'No valid media found' });
-    }
-
-    const files = mediaItems.map(item => ({
-      url: item.url,
-      thumbnail: item.thumbnail || null,
-      media_type: item.url.includes('.mp4') ? 'video' : 'image',  // crude, but works for now
-    }));
-
-    return res.status(200).json({ files });
-
-  } catch (err) {
-    console.error('❌ Download handler error:', err);
-    return res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message || err.toString()
-    });
+  if (!mediaItems.length) {
+    return res.status(404).json({ message: 'No valid media found' });
   }
+
+  const files = mediaItems.map(item => ({
+    url: item.url,
+    thumbnail: item.thumbnail || null,
+    media_type: item.url.includes('.mp4') ? 'video' : 'image',  // crude detection, fine for now
+  }));
+
+  console.log('🛑 Final Response about to send to frontend:', JSON.stringify({ files }, null, 2)); // 🔥 move log here
+
+  return res.status(200).json({ files });
+
+} catch (err) {
+  console.error('❌ Download handler error:', err);
+  return res.status(500).json({
+    message: 'Something went wrong',
+    error: err.message || err.toString()
+  });
+}
 }
