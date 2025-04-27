@@ -39,9 +39,18 @@ export default async function handler(req, res) {
     const rapidData = await rapid.json();
     console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
 
-    const mediaItems = rapidData?.media || [];
+    let mediaItems = [];
 
-    // 🔥 Updated Validator: fallback if HEAD fails
+    if (Array.isArray(rapidData.media) && rapidData.media.length > 0) {
+      mediaItems = rapidData.media;
+    } else if (rapidData.download_url) {
+      // 🎯 If single download_url, treat it as a single media item
+      mediaItems = [{
+        url: rapidData.download_url,
+        thumbnail: rapidData.thumbnail || null,
+      }];
+    }
+
     async function validateUrl(item) {
       try {
         const controller = new AbortController();
@@ -52,7 +61,6 @@ export default async function handler(req, res) {
 
         const type = head.headers.get('content-type');
         if (!type || (!type.includes('image') && !type.includes('video'))) {
-          // 🛡 fallback: still accept URL if type unknown
           return {
             url: item.url,
             media_type: 'unknown',
@@ -67,8 +75,6 @@ export default async function handler(req, res) {
         };
       } catch (error) {
         console.warn('⚠️ Media validation failed:', item.url, error.message || error.toString());
-
-        // 🛡 fallback: still accept URL if HEAD fails
         return {
           url: item.url,
           media_type: 'unknown',
