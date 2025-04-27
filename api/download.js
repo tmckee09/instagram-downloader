@@ -9,11 +9,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Invalid Instagram URL' });
   }
 
- const RAPIDAPI_URL = 'https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert';
-const RAPIDAPI_HEADERS = {
-  'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa', // your actual working key
-  'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com',
-};
+  const RAPIDAPI_URL = 'https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert';
+  const RAPIDAPI_HEADERS = {
+    'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
+    'X-RapidAPI-Host': 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com',
+  };
 
   async function fetchWithRetry(url, options, retries = 2) {
     try {
@@ -29,36 +29,51 @@ const RAPIDAPI_HEADERS = {
     }
   }
 
- try {
-  const rapid = await fetchWithRetry(`${RAPIDAPI_URL}?url=${encodeURIComponent(url)}`, {
-    method: 'GET',
-    headers: RAPIDAPI_HEADERS,
-  });
+  try {
+    const rapid = await fetchWithRetry(`${RAPIDAPI_URL}?url=${encodeURIComponent(url)}`, {
+      method: 'GET',
+      headers: RAPIDAPI_HEADERS,
+    });
 
-  const rapidData = await rapid.json();
-  console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
+    const rapidData = await rapid.json();
+    console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
 
-  const mediaItems = Array.isArray(rapidData?.media) ? rapidData.media : [];
+    // ✅ Updated mediaItems parser
+    let mediaItems = [];
 
-  if (!mediaItems.length) {
-    return res.status(404).json({ message: 'No valid media found' });
+    if (Array.isArray(rapidData?.media)) {
+      mediaItems = rapidData.media;
+    } else if (rapidData?.url) {
+      mediaItems = [{
+        url: rapidData.url,
+        thumbnail: rapidData.thumbnail || null,
+      }];
+    } else if (rapidData?.download_url) {
+      mediaItems = [{
+        url: rapidData.download_url,
+        thumbnail: rapidData.thumbnail || null,
+      }];
+    }
+
+    if (!mediaItems.length) {
+      return res.status(404).json({ message: 'No valid media found' });
+    }
+
+    const files = mediaItems.map(item => ({
+      url: item.url,
+      thumbnail: item.thumbnail || null,
+      media_type: item.url.includes('.mp4') ? 'video' : 'image',
+    }));
+
+    console.log('🛑 Final Response about to send to frontend:', JSON.stringify({ files }, null, 2));
+
+    return res.status(200).json({ files });
+
+  } catch (err) {
+    console.error('❌ Download handler error:', err);
+    return res.status(500).json({
+      message: 'Something went wrong',
+      error: err.message || err.toString()
+    });
   }
-
-  const files = mediaItems.map(item => ({
-    url: item.url,
-    thumbnail: item.thumbnail || null,
-    media_type: item.url.includes('.mp4') ? 'video' : 'image',  // crude detection, fine for now
-  }));
-
-  console.log('🛑 Final Response about to send to frontend:', JSON.stringify({ files }, null, 2)); // 🔥 move log here
-
-  return res.status(200).json({ files });
-
-} catch (err) {
-  console.error('❌ Download handler error:', err);
-  return res.status(500).json({
-    message: 'Something went wrong',
-    error: err.message || err.toString()
-  });
-}
 }
