@@ -9,19 +9,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Invalid Instagram URL' });
   }
 
-  // 🛡 Fast Private Account Detector (NEW)
-  try {
-    const testFetch = await fetch(url, { method: 'HEAD' });
-    const contentType = testFetch.headers.get('content-type') || '';
-
-    if (contentType.includes('text/html')) {
-      return res.status(403).json({ message: 'This Instagram post is private, restricted, or unavailable.' });
-    }
-  } catch (err) {
-    console.warn('⚠️ Private/Dead post detection triggered:', err.message || err.toString());
-    return res.status(403).json({ message: 'This Instagram post is private, restricted, or unavailable.' });
-  }
-
   const RAPIDAPI_URL = 'https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert';
   const RAPIDAPI_HEADERS = {
     'X-RapidAPI-Key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa',
