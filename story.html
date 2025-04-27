@@ -102,19 +102,18 @@
         })
         .then(res => res.json())
         .then(data => {
-          if (data.files && data.files.length > 0) {
-            result = data.files;
-            loading = false;
-            error = '';
-          } else {
-            error = 'No downloadable stories found.';
-            loading = false;
-          }
-        })
-        .catch(() => {
-          error = 'Failed to fetch story.';
-          loading = false;
-        });">
+         if (data.files && data.files.length > 0) {
+  result = data.files.map(file => ({
+    download_url: file.url,
+    media_type: file.media_type,
+    thumbnail: file.thumbnail
+  }));
+  loading = false;
+  error = '';
+} else {
+  error = 'No downloadable stories found.';
+  loading = false;
+}
 
         <div class="flex flex-col sm:flex-row w-full gap-2">
           <input type="text" placeholder="Paste Instagram Story URL here" x-ref="urlInput" class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500" />
