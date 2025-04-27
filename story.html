@@ -88,42 +88,42 @@
     </p>
 
     <!-- Form -->
-    <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
-      <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
-        gtag('event', 'download_attempt', { event_category: 'Engagement', event_label: 'Download Form Submitted' });
-        loading = true;
-        fetch('/api/download', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: $refs.urlInput.value })
-        })
-        .then(res => res.json())
-        .then(data => {
-          const mediaItems = data.files || data.media || [];
-          if (mediaItems.length > 0) {
-            const firstFile = mediaItems[0];
-            result = {
-              download_url: firstFile.url,
-              media_type: firstFile.media_type,
-              thumbnail: firstFile.thumbnail
-            };
-            loading = false;
-            error = '';
-            const link = document.createElement('a');
-            link.href = result.download_url;
-            link.download = '';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          } else {
-            error = 'No downloadable stories found.';
-            loading = false;
-          }
-        })
-        .catch(() => {
-          error = 'Failed to fetch story.';
-          loading = false;
-        });">
+    <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+  gtag('event', 'download_attempt', { event_category: 'Engagement', event_label: 'Download Form Submitted' });
+  loading = true;
+  fetch('/api/download', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: $refs.urlInput.value })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const items = data.files || data.media || [];
+    if (items.length > 0) {
+      const firstFile = items[0];
+      result = {
+        download_url: firstFile.url,
+        media_type: firstFile.media_type,
+        thumbnail: firstFile.thumbnail
+      };
+      loading = false;
+      error = '';
+      const link = document.createElement('a');
+      link.href = result.download_url;
+      link.download = '';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      error = 'No downloadable stories found.';
+      loading = false;
+    }
+  })
+  .catch(() => {
+    error = 'Failed to fetch story.';
+    loading = false;
+  });
+">
 
         <div class="flex flex-col sm:flex-row w-full gap-2">
           <input type="text" placeholder="Paste Instagram Story URL here" x-ref="urlInput" class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500" />
