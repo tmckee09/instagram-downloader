@@ -29,6 +29,43 @@ export default async function handler(req, res) {
     }
   }
 
+  function normalizeMediaItems(data) {
+    const items = [];
+
+    if (Array.isArray(data?.media)) {
+      for (const item of data.media) {
+        if (item.url) {
+          items.push({
+            url: item.url,
+            thumbnail: item.thumbnail || null,
+            media_type: item.url.includes('.mp4') ? 'video' : 'image',
+          });
+        }
+
+        // Handle nested children array (carousel posts)
+        if (Array.isArray(item.children)) {
+          for (const child of item.children) {
+            if (child.url) {
+              items.push({
+                url: child.url,
+                thumbnail: child.thumbnail || null,
+                media_type: child.url.includes('.mp4') ? 'video' : 'image',
+              });
+            }
+          }
+        }
+      }
+    } else if (data?.url) {
+      items.push({
+        url: data.url,
+        thumbnail: data.thumbnail || null,
+        media_type: data.url.includes('.mp4') ? 'video' : 'image',
+      });
+    }
+
+    return items;
+  }
+
   try {
     const rapid = await fetchWithRetry(`${RAPIDAPI_URL}?url=${encodeURIComponent(url)}`, {
       method: 'GET',
@@ -38,35 +75,13 @@ export default async function handler(req, res) {
     const rapidData = await rapid.json();
     console.log('📦 RapidAPI response:', JSON.stringify(rapidData, null, 2));
 
-    // ✅ Updated mediaItems parser
-    let mediaItems = [];
+    const files = normalizeMediaItems(rapidData);
 
-    if (Array.isArray(rapidData?.media)) {
-      mediaItems = rapidData.media;
-    } else if (rapidData?.url) {
-      mediaItems = [{
-        url: rapidData.url,
-        thumbnail: rapidData.thumbnail || null,
-      }];
-    } else if (rapidData?.download_url) {
-      mediaItems = [{
-        url: rapidData.download_url,
-        thumbnail: rapidData.thumbnail || null,
-      }];
-    }
-
-    if (!mediaItems.length) {
+    if (!files.length) {
       return res.status(404).json({ message: 'No valid media found' });
     }
 
-    const files = mediaItems.map(item => ({
-      url: item.url,
-      thumbnail: item.thumbnail || null,
-      media_type: item.url.includes('.mp4') ? 'video' : 'image',
-    }));
-
-    console.log('🛑 Final Response about to send to frontend:', JSON.stringify({ files }, null, 2));
-
+    console.log('🛑 Final Response to frontend:', JSON.stringify({ files }, null, 2));
     return res.status(200).json({ files });
 
   } catch (err) {
