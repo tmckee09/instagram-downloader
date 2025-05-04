@@ -1,15 +1,1 @@
-{
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.instadl.org"
-        }
-      ],
-      "destination": "https://instadl.org/:1",
-      "permanent": true
-    }
-  ]
-}
+
