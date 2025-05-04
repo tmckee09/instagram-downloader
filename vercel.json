@@ -1,19 +1,14 @@
 {
   "redirects": [
     {
-      "source": "/",
+      "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "www.instadl.org" }
+        {
+          "type": "host",
+          "value": "www.instadl.org"
+        }
       ],
-      "destination": "https://instadl.org/",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "has": [
-        { "type": "host", "value": "instadl.org" }
-      ],
-      "destination": "https://instadl.org/",
+      "destination": "https://instadl.org/:1",
       "permanent": true
     }
   ]
