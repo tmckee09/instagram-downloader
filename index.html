@@ -200,10 +200,16 @@
 
   <!-- SEO-Optimized Section -->
 <section class="py-24 px-6 bg-gradient-to-b from-white to-gray-50 relative fade-in">
-  <!-- Background vines (absolute decorations) -->
-  <div class="absolute top-0 left-0 w-32 h-32 bg-[url('/img/vines-1.png')] bg-no-repeat bg-contain opacity-30 z-0"></div>
-  <div class="absolute bottom-0 right-0 w-36 h-36 bg-[url('/img/vines-2.png')] bg-no-repeat bg-contain opacity-30 z-0"></div>
-  <div class="absolute top-[40%] left-1/2 transform -translate-x-1/2 w-32 h-48 bg-[url('/img/vines-3.png')] bg-no-repeat bg-contain opacity-30 z-0"></div>
+  <!-- Background vines (absolute decorations using <img>) -->
+  <div class="absolute top-0 left-0 w-32 h-32 opacity-30 z-0">
+    <img src="/img/vines-1.png" alt="Decorative vine" class="w-full h-full object-contain" />
+  </div>
+  <div class="absolute bottom-0 right-0 w-36 h-36 opacity-30 z-0">
+    <img src="/img/vines-2.png" alt="Decorative vine" class="w-full h-full object-contain" />
+  </div>
+  <div class="absolute top-[40%] left-1/2 transform -translate-x-1/2 w-32 h-48 opacity-30 z-0">
+    <img src="/img/vines-3.png" alt="Decorative vine" class="w-full h-full object-contain" />
+  </div>
 
   <div class="max-w-5xl mx-auto text-center relative z-10">
     <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-gray-800 tracking-tight">InstaDL Features</h2>
@@ -216,10 +222,10 @@
       <style>
         .feature-bubble {
           @apply bg-white rounded-3xl shadow-xl border border-gray-100 transition-all duration-300;
-          box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
         }
         .feature-bubble:hover {
-          box-shadow: 0 18px 36px rgba(0,0,0,0.1);
+          box-shadow: 0 18px 36px rgba(0, 0, 0, 0.1);
         }
       </style>
 
