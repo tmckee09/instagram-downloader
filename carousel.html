@@ -11,15 +11,14 @@
   <!-- ✅ Google AdSense Site-Wide Script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-01PYD112H4');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01PYD112H4');
+  </script>
   
   <!-- SEO Meta Tags -->
   <meta name="description" content="Download Instagram carousels with all images and videos in high quality. Supports multi-posts, albums, and more." />
@@ -105,15 +104,13 @@
 <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
   <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
     <h1 class="text-5xl font-extrabold mb-4 leading-tight text-white drop-shadow-xl">
-      <span class="inline-block text-white">Instagram</span>
-      <span class="inline-block text-yellow-300">Carousel Downloader</span>
+      Instagram <span class="text-yellow-300">Carousel Downloader</span>
     </h1>
     <p class="text-lg mb-6 text-white/90">
-      <span class="block">Download <span class="text-yellow-200 font-semibold">all images and videos</span> in Instagram carousels</span>
-      <span class="block text-white/80 text-sm mt-1">Watermark-free. No sign-in. Mobile-friendly.</span>
+      Download all images and videos from Instagram carousels. Watermark-free. No login needed.
     </p>
 
-    <!-- 🧊 Glass Form -->
+    <!-- 🔽 Downloader Component -->
     <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
       <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
         loading = true;
@@ -173,23 +170,32 @@
           </template>
         </div>
       </template>
-
-      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram carousels are supported. Private or expired content won’t work.</p>
+      <p class="mt-8 text-xs text-center text-white/80">Only public Instagram carousels are supported. Private or expired content won't work.</p>
     </div>
   </div>
+</section>
 
 <!-- Google AdSense Inline Ad -->
-      <div class="my-6 w-full">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2035725815108237"
-             data-ad-slot="auto"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
+<div class="my-6 w-full">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2035725815108237"
+       data-ad-slot="auto"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<!-- 🔽 SEO Content Section -->
+<section class="bg-white py-16 px-6 fade-in">
+  <div class="max-w-4xl mx-auto text-center text-gray-800">
+    <h2 class="text-3xl font-bold mb-6">How to Download Instagram Carousels</h2>
+    <p class="text-base leading-relaxed mb-6">InstaDL makes it easy to download entire Instagram carousel posts, including all images and videos. Just paste the URL of the post, and we’ll fetch all media in one go — ready for you to save offline, organize, or repurpose.</p>
+    <p class="text-base leading-relaxed mb-6">We support public Instagram carousels (also called albums or multi-posts) with zero watermark, full resolution, and no login required. This tool is ideal for content creators, researchers, and marketers who need quick, high-quality access to visual content.</p>
+    <p class="text-base leading-relaxed">Unlike other tools filled with clutter and redirects, InstaDL offers a clean and simple way to batch-download Instagram content securely and reliably.</p>
+  </div>
 </section>
 
 <!-- Footer -->
@@ -201,7 +207,7 @@
       <a href="/reels.html" class="hover:text-white">Reels</a>
       <a href="/story.html" class="hover:text-white">Story</a>
       <a href="/igtv.html" class="hover:text-white">IGTV</a>
-      <a href="/carousel.html" class="hover:text-white">Carousel</a>
+      <a href="/carousel.html" class="hover:text-white font-semibold text-white">Carousel</a>
       <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
     </div>
     <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
