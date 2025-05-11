@@ -3,35 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instagram Story Downloader - Save Stories in HD | InstaDL</title>
 
-  <!-- ✅ Font -->
+  <!-- Elite SEO Title & Description -->
+  <title>Instagram Story Downloader – Download Instagram Stories in HD</title>
+  <meta
+    name="description"
+    content="Instagram Story Downloader by InstaDL — save any public Instagram Story in full HD, no watermark or login required. Fast, unlimited downloads."
+  />
+  <meta
+    name="keywords"
+    content="instagram story downloader, download instagram stories, save instagram story, free IG download, no watermark"
+  />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://instadl.org/story.html" />
+
+  <!-- Sitelinks SearchBox & Navigation JSON‑LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "url":"https://instadl.org/",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://instadl.org/?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SiteNavigationElement",
+    "name":"InstaDL Main Navigation",
+    "url":"https://instadl.org/",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Story Downloader","url":"https://instadl.org/story.html"},
+      {"@type":"ListItem","position":2,"name":"Video Downloader","url":"https://instadl.org/video.html"},
+      {"@type":"ListItem","position":3,"name":"Reels Downloader","url":"https://instadl.org/reels.html"},
+      {"@type":"ListItem","position":4,"name":"Photo Downloader","url":"https://instadl.org/photo.html"},
+      {"@type":"ListItem","position":5,"name":"IGTV Downloader","url":"https://instadl.org/igtv.html"},
+      {"@type":"ListItem","position":6,"name":"Carousel Downloader","url":"https://instadl.org/carousel.html"}
+    ]
+  }
+  </script>
+
+  <!-- ✅ Font & Ads & Analytics -->
   <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
-
-  <!-- ✅ Google AdSense Site-Wide Script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
-
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-01PYD112H4');
+    gtag('config','G-01PYD112H4');
   </script>
 
-  <!-- SEO Meta Tags -->
-<meta name="description" content="Download Instagram videos, Reels, Stories, IGTV, and photos in HD. No watermark. Free, fast, and secure with InstaDL. No login needed.">
-<meta name="keywords" content="Instagram downloader, download Instagram video, Instagram Reels downloader, IG downloader, save Instagram Stories, download Instagram photo, HD Instagram downloads, free IG download, no watermark" />
-<meta name="robots" content="index, follow" />
-<meta name="google-adsense-account" content="ca-pub-2035725815108237" />
-<link rel="canonical" href="https://www.instadl.org/story.html" />
-<link rel="icon" href="/favicon.ico" />
+  <!-- Other Meta -->
+  <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-2035725815108237" />
+  <link rel="icon" href="/favicon.ico" />
 
   <!-- Tailwind & AlpineJS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+  <!-- Global Styles -->
   <style>
     html { scroll-behavior: smooth; }
     body { margin-top: 160px; }
@@ -39,7 +76,7 @@
     .slide-up { animation: slideUp 1.2s ease-out both; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-    .floating-ad { position: fixed; top: 120px; width: 160px; z-index: 9999; }
+    .floating-ad { position: fixed; top: 120px; width: 160px; height: auto; z-index: 9999; }
     .floating-ad-left { left: 10px; }
     .floating-ad-right { right: 10px; }
     @media (max-width: 1024px) { .floating-ad { display: none; } }
@@ -171,17 +208,18 @@
 <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
   <div class="max-w-5xl mx-auto text-center space-y-4">
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="/video.html" class="hover:text-white">Video</a>
-      <a href="/photo.html" class="hover:text-white">Photo</a>
-      <a href="/reels.html" class="hover:text-white">Reels</a>
-      <a href="/story.html" class="hover:text-white font-semibold text-white">Story</a>
-      <a href="/igtv.html" class="hover:text-white">IGTV</a>
-      <a href="/carousel.html" class="hover:text-white">Carousel</a>
+      <a href="/video.html" class="hover:text-white">Download Instagram Video</a>
+      <a href="/photo.html" class="hover:text-white">Instagram Photo Downloader</a>
+      <a href="/reels.html" class="hover:text-white">Instagram Reels Downloader</a>
+      <a href="/igtv.html" class="hover:text-white">Download IGTV Video</a>
+      <a href="/carousel.html" class="hover:text-white">Instagram Carousel Downloader</a>
       <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+      <a href="/terms-of-services.html" class="hover:text-white">Terms & Conditions</a>
     </div>
     <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
   </div>
 </footer>
+
 
 </body>
 </html>
