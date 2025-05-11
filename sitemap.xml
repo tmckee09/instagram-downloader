@@ -53,4 +53,10 @@
     <priority>0.70</priority>
   </url>
 
+  <url>
+    <loc>https://www.instadl.org/download-story-no-login.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.40</priority>
+  </url>
+
 </urlset>
