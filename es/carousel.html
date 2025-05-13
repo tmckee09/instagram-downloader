@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta property="og:site_name" content="Descargador de Instagram" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Elite Title & Description -->
+  <!-- TODO: Translate -->
+  <title>Descargar vídeos y fotos de Instagram – InstaDL™</title>
+  <meta
+    name="description"
+    content="Descarga vídeos, Reels, Stories y fotos de Instagram en línea gratis con InstaDL™. Sin marcas de agua, sin inicio de sesión; descargas HD ilimitadas en segundos."
+  />
+  <meta name="keywords" content="descargador de Instagram, descargar vídeos de Instagram, descargar fotos de Instagram, InstaDL" />
+  
+  <!-- Canonical & Hreflang -->
+  <link rel="canonical" href="https://instadl.org/es/" />
+  <link rel="alternate" hreflang="es" href="https://instadl.org/es/" />
+  <link rel="alternate" hreflang="en" href="https://instadl.org/" />
+  <link rel="alternate" hreflang="x-default" href="https://instadl.org/" />
+
+  <!-- ✅ Font -->
+  <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
+
+  <!-- ✅ Google AdSense Site‑Wide Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01PYD112H4');
+  </script>
+
+  <!-- SEO Meta Tags -->
+  <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-2035725815108237" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Tailwind & AlpineJS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Add this style block to push content below fixed bars and enable animations -->
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin-top: 160px; }
+    .fade-in { animation: fadeIn 1.2s ease-in both; }
+    .slide-up { animation: slideUp 1.2s ease-out both; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    .floating-ad { position: fixed; top: 120px; width: 160px; z-index: 50; }
+    .floating-ad-left { left: 10px; }
+    .floating-ad-right { right: 10px; }
+    @media (max-width: 1024px) { .floating-ad { display: none; } }
+  </style>
+
+  <!-- Sitelinks SearchBox & Navigation JSON‑LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Descargador de Instagram",
+    "url": "https://instadl.org/es/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://instadl.org/es/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Organization JSON‑LD for explicit “site name” -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Descargador de Instagram",
+    "url": "https://instadl.org/es/",
+    "logo": "https://instadl.org/logo.png"
+  }
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Floating Side Ads -->
+  <div class="floating-ad floating-ad-left">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2035725815108237"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="floating-ad floating-ad-right">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2035725815108237"
+         data-ad-slot="0987654321"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- 🖝 Top Navbar -->
+  <nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <img src="/logo.png" alt="Logo de InstaDL" class="h-6 w-auto" />
+    </div>
+    <div class="flex gap-6 text-sm text-gray-700 items-center">
+      <a href="/faq.html" class="hover:text-pink-500">Preguntas Frecuentes</a>
+      <!-- Language switcher dropdown -->
+      <div x-data="{ open: false }" class="relative">
+        <button
+          @click="open = !open"
+          class="flex items-center gap-1 hover:text-pink-500"
+        >
+          ES
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"/>
+          </svg>
+        </button>
+        <div
+          x-show="open"
+          @click.away="open = false"
+          x-transition
+          class="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded shadow-lg z-50"
+        >
+          <a
+            href="https://instadl.org/"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+          >
+            English
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 💡 Floating Feature Bar -->
+  <div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
+    <a href="/es/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">Vídeo</a>
+    <a href="/es/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Foto</a>
+    <a href="/es/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Reels</a>
+    <a href="/es/story.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Historia</a>
+    <a href="/es/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">IGTV</a>
+    <a href="/es/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carrusel</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
+    <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
+      <h1 class="text-5xl font-extrabold mb-4 leading-tight text-white drop-shadow-xl">
+        <span class="inline-block">Descargador de</span>
+        <span class="inline-block text-yellow-300">Instagram</span>
+      </h1>
+      <p class="text-lg mb-2 text-white/90">
+        <span class="block">Descarga <span class="font-semibold">Reels, Fotos y vídeos</span> en HD</span>
+        <span class="block text-white/80 text-sm mt-1">Sin marcas de agua. Sin inicio de sesión.</span>
+      </p>
+      <p class="text-xs text-gray-100 mt-2">
+        ✅ Sin marca de agua &nbsp; • &nbsp; 🔒 Seguro & ⚡️ Rápido &nbsp; • &nbsp; 🗕 Actualizado Abr 2025
+      </p>
+
+      <!-- Input Form -->
+      <div class="mt-8 bg-white/20 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
+        <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+          loading = true;
+          error = '';
+          fetch('/api/download', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: $refs.urlInput.value })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.files && data.files.length > 0) {
+              result = data.files;
+            } else {
+              error = 'No se encontraron archivos para descargar.';
+            }
+            loading = false;
+          })
+          .catch(() => {
+            error = 'Error al obtener el contenido.';
+            loading = false;
+          });">
+          <div class="flex flex-col sm:flex-row w-full gap-2">
+            <input
+              type="text"
+              placeholder="Introduce el enlace de Instagram aquí"
+              x-ref="urlInput"
+              class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500"
+            />
+            <button
+              type="button"
+              class="bg-white text-gray-800 border border-gray-300 px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition-all duration-200 shadow-sm"
+              @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)"
+            >
+              Pegar
+            </button>
+          </div>
+          <button
+            type="submit"
+            class="mt-4 sm:mt-0 bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white shadow-md hover:shadow-xl transition-all duration-300 py-3 px-6 rounded-lg w-full sm:w-auto font-semibold text-sm"
+          >
+            Descargar
+          </button>
+        </form>
+
+        <!-- Status & Results -->
+        <div class="mt-4 text-sm text-white/90" x-show="loading">Obteniendo enlace de descarga...</div>
+        <template x-if="error">
+          <div class="mt-4 text-red-200 text-sm" x-text="error"></div>
+        </template>
+        <template x-if="result && result.length > 0">
+          <div class="mt-6 text-center slide-up space-y-6">
+            <template x-for="file in result" :key="file.url">
+              <div class="space-y-2">
+                <template x-if="file.thumbnail">
+                  <img :src="file.thumbnail" alt="Vista previa de Instagram" class="rounded mb-2 w-full max-h-64 object-cover shadow-md" />
+                </template>
+                <template x-if="!file.thumbnail">
+                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-600 border border-dashed rounded">
+                    <span class="text-sm">Sin vista previa</span>
+                  </div>
+                </template>
+                <a
+                  :href="file.url"
+                  target="_blank"
+                  class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition"
+                  x-text="file.media_type === 'video' ? 'Descargar Vídeo' : 'Descargar Imagen'"
+                ></a>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🛠 Cómo funciona -->
+  <section class="py-24 px-6 text-center fade-in bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Cómo funciona</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
+          <img src="/copy-link-icon.png" alt="Icono pegar enlace" class="w-12 h-12 mx-auto mb-4" />
+          <h3 class="text-xl font-bold">Pega la URL</h3>
+          <p class="text-sm text-gray-600 mt-2">Copia cualquier enlace de Instagram y pégalo arriba.</p>
+        </div>
+        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
+          <img src="/server-icon.png" alt="Icono buscar" class="w-12 h-12 mx-auto mb-4" />
+          <h3 class="text-xl font-bold">Buscamos tu contenido</h3>
+          <p class="text-sm text-gray-600 mt-2">Nuestro sistema lo prepara al instante en HD.</p>
+        </div>
+        <div class="shadow-lg p-6 rounded-xl bg-gray-50 hover:shadow-xl transition">
+          <img src="/favicon.ico" alt="Icono descarga" class="w-12 h-12 mx-auto mb-4" />
+          <h3 class="text-xl font-bold">Descarga y disfruta</h3>
+          <p class="text-sm text-gray-600 mt-2">Guarda tu contenido sin marcas de agua ni pérdida de calidad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Funciones de InstaDL -->
+  <section class="py-24 px-6 bg-gradient-to-b from-white to-gray-50 fade-in">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6 tracking-tight">Funciones de InstaDL</h2>
+      <p class="text-base text-gray-600 mb-12 leading-relaxed">
+        Con InstaDL puedes descargar cualquier tipo de contenido de Instagram. Nuestro servicio soporta Vídeos, Reels, IGTV, Fotos, Stories y Carruseles — todo en alta calidad y sin marcas de agua.
+      </p>
+    </div>
+  </section>
+
+  <!-- Por qué confían en InstaDL -->
+  <section class="py-20 px-6 bg-white fade-in">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Por qué confían en InstaDL</h2>
+      <p class="text-base text-gray-600 leading-relaxed mb-8">
+        InstaDL destaca por centrarse en lo que realmente importa: descargas rápidas, seguras y en alta calidad sin complicaciones. A diferencia de otros sitios llenos de ventanas emergentes y botones falsos, ofrecemos una experiencia limpia y sencilla que funciona en cualquier dispositivo.
+      </p>
+      <a href="#top" class="inline-block bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+        Pega un enlace arriba y comienza →
+      </a>
+    </div>
+  </section>
+
+  <!-- ¿Por qué usar instadl.org? -->
+  <section class="py-24 px-6 bg-gray-50 fade-in">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-8 tracking-tight">¿Por qué usar instadl.org?</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <ul class="space-y-5 text-left text-gray-700 leading-relaxed">
+          <li class="flex items-start gap-3"><span class="text-green-500 text-xl">✔️</span>Descarga Reels, vídeos, fotos y carruseles en alta calidad</li>
+          <li class="flex items-start gap-3"><span class="text-green-500 text-xl">✔️</span>Sin inicio de sesión ni app — solo pega el enlace</li>
+          <li class="flex items-start gap-3"><span class="text-green-500 text-xl">✔️</span>Funciona en móviles, tablets y escritorios</li>
+          <li class="flex items-start gap-3"><span class="text-green-500 text-xl">✔️</span>Sin pop‑ups ni spam — descargas limpias</li>
+          <li class="flex items-start gap-3"><span class="text-green-500 text-xl">✔️</span>Cada descarga sin marcas de agua y en resolución completa</li>
+        </ul>
+        <img src="https://techcrunch.com/wp-content/uploads/2023/03/alexander-shatov-71Qk8ODIBko-unsplash.jpg?w=1024" alt="Gráfico Instagram" class="rounded-xl shadow-xl w-full" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 px-6 bg-white fade-in">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">¿Listo para descargar?</h2>
+      <p class="text-gray-600 mb-6">Pega tu URL de Instagram arriba y pulsa “Descargar”. Así de fácil.</p>
+      <img src="https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1254/MTkwNTgxMTkzOTgyMjI0MjUy/how-to-use-instagram-jpg.webp" alt="Teléfono usando Instagram" class="rounded-lg mx-auto w-full max-w-lg shadow-lg" />
+    </div>
+  </section>
+
+  <!-- Guías útiles -->
+  <section class="py-10 text-center text-xs text-gray-400">
+    <a href="/es/download-story-no-login.html" class="hover:text-pink-400">Descargar Story sin iniciar sesión</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 text-sm py-10 px-6">
+    <div class="max-w-5xl mx-auto text-center space-y-4">
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/es/video.html" class="hover:text-white">Descargar vídeo de Instagram</a>
+        <a href="/es/photo.html" class="hover:text-white">Descargador de fotos de Instagram</a>
+        <a href="/es/reels.html" class="hover:text-white">Descargador de Reels de Instagram</a>
+        <a href="/es/story.html" class="hover:text-white">Descargador de Stories de Instagram</a>
+        <a href="/es/igtv.html" class="hover:text-white">Descargar vídeo e IGTV de Instagram</a>
+        <a href="/es/carousel.html" class="hover:text-white">Descargador de carruseles de Instagram</a>
+        <a href="/privacy.html" class="hover:text-white">Política de Privacidad</a>
+        <a href="/terms-of-services.html" class="hover:text-white">Términos y Condiciones</a>
+        <span>Descargador de vídeo de TikTok (próximamente)</span>
+        <a href="/es/download-story-no-login.html" class="order-last text-xs text-gray-600 hover:text-gray-500 opacity-50">Descargar Story sin iniciar sesión</a>
+      </div>
+      <div class="mt-4">© 2025 InstaDL. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
