@@ -5,56 +5,86 @@
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
                       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <!-- English pages -->
   <url>
     <loc>https://www.instadl.org/</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>1.00</priority>
   </url>
-
   <url>
     <loc>https://www.instadl.org/photo.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
   </url>
-
   <url>
     <loc>https://www.instadl.org/reels.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
   </url>
-
   <url>
     <loc>https://www.instadl.org/story.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
   </url>
-
   <url>
     <loc>https://www.instadl.org/igtv.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.85</priority>
   </url>
-
   <url>
     <loc>https://www.instadl.org/carousel.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.85</priority>
   </url>
-
-  <url>
-    <loc>https://www.instadl.org/privacy.html</loc>
-    <lastmod>2025-04-24</lastmod>
-    <priority>0.50</priority>
-  </url>
-
   <url>
     <loc>https://www.instadl.org/faq.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.70</priority>
   </url>
-
   <url>
     <loc>https://www.instadl.org/download-story-no-login.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <!-- Spanish pages -->
+  <url>
+    <loc>https://www.instadl.org/es/</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/photo.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/reels.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/story.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/igtv.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/carousel.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/faq.html</loc>
+    <lastmod>2025-04-24</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.instadl.org/es/download-story-no-login.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.40</priority>
   </url>
