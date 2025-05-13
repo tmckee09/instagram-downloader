@@ -109,16 +109,22 @@
   <!-- 🖝 Top Navbar -->
 <nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
   <div class="flex items-center gap-2">
-    <img src="/logo.png" alt="Logo InstaDL" class="h-6 w-auto" />
+    <img src="/logo.png" alt="Logo de InstaDL" class="h-6 w-auto" />
   </div>
   <div class="flex gap-6 text-sm text-gray-700 items-center">
     <a href="/fr/faq.html" class="hover:text-pink-500">FAQ</a>
-    <!-- Sélecteur de langue -->
+
+    <!-- Language switcher dropdown -->
     <div x-data="{ open: false }" class="relative">
-      <button @click="open = !open" class="flex items-center gap-1 hover:text-pink-500">
+      <button
+        @click="open = !open"
+        class="flex items-center gap-1 hover:text-pink-500"
+      >
         FR
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"/>
         </svg>
       </button>
       <div
@@ -127,27 +133,23 @@
         x-transition
         class="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded shadow-lg z-50"
       >
-        <a href="https://instadl.org/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-          English
-        </a>
-        <a href="https://instadl.org/es/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-          Español
-        </a>
+        <a href="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">English</a>
+        <a href="/es/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Español</a>
       </div>
     </div>
   </div>
 </nav>
 
-  <!-- 💡 Floating Feature Bar -->
-  <div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
-    <a href="/fr/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">Vidéo</a>
-    <a href="/fr/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Photo</a>
-    <a href="/fr/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Reels</a>
-    <a href="/fr/story.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Histoire</a>
-    <a href="/fr/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">IGTV</a>
-    <a href="/fr/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carrousel</a>
-  </div>
-
+<!-- 💡 Floating Feature Bar -->
+<div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
+  <a href="/fr/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">Vidéo</a>
+  <a href="/fr/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Photo</a>
+  <a href="/fr/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Reels</a>
+  <a href="/fr/story.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Story</a>
+  <a href="/fr/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">IGTV</a>
+  <a href="/fr/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carrousel</a>
+</div>
+  
   <!-- Hero Section -->
   <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
     <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading:false,result:null,error:'' }">
