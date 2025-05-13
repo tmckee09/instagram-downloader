@@ -45,6 +45,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+  <!-- Add this style block to push content below fixed bars and enable animations -->
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin-top: 160px; }
+    .fade-in { animation: fadeIn 1.2s ease-in both; }
+    .slide-up { animation: slideUp 1.2s ease-out both; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideUp {
+      0%   { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0);     opacity: 1; }
+    }
+    .floating-ad { position: fixed; top: 120px; width: 160px; z-index: 50; }
+    .floating-ad-left { left: 10px; }
+    .floating-ad-right { right: 10px; }
+    @media (max-width: 1024px) { .floating-ad { display: none; } }
+  </style>
+
   <!-- Sitelinks SearchBox & Navigation JSON‑LD -->
   <script type="application/ld+json">
   {
