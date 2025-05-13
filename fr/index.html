@@ -107,26 +107,36 @@
   </div>
 
   <!-- 🖝 Top Navbar -->
-  <nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-2">
-      <img src="/logo.png" alt="Logo InstaDL" class="h-6 w-auto" />
-    </div>
-    <div class="flex gap-6 text-sm text-gray-700 items-center">
-      <a href="/fr/faq.html" class="hover:text-pink-500">FAQ</a>
-      <!-- Sélecteur de langue -->
-      <div x-data="{ open: false }" class="relative">
-        <button @click="open = !open" class="flex items-center gap-1 hover:text-pink-500">
-          FR
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
-          </svg>
-        </button>
-        <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded shadow-lg z-50">
-          <a href="https://instadl.org/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">English</a>
-        </div>
+<nav class="absolute top-0 left-0 right-0 z-50 bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+  <div class="flex items-center gap-2">
+    <img src="/logo.png" alt="Logo InstaDL" class="h-6 w-auto" />
+  </div>
+  <div class="flex gap-6 text-sm text-gray-700 items-center">
+    <a href="/fr/faq.html" class="hover:text-pink-500">FAQ</a>
+    <!-- Sélecteur de langue -->
+    <div x-data="{ open: false }" class="relative">
+      <button @click="open = !open" class="flex items-center gap-1 hover:text-pink-500">
+        FR
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+      <div
+        x-show="open"
+        @click.away="open = false"
+        x-transition
+        class="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded shadow-lg z-50"
+      >
+        <a href="https://instadl.org/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+          English
+        </a>
+        <a href="https://instadl.org/es/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+          Español
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- 💡 Floating Feature Bar -->
   <div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
