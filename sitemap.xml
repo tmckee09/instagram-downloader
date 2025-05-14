@@ -89,4 +89,12 @@
     <priority>0.40</priority>
   </url>
 
+  <!-- Italian page -->
+  <url>
+    <loc>https://www.instadl.org/it.html</loc>
+    <lastmod>2025-05-14</lastmod>
+    <priority>0.40</priority>
+  </url>
+
 </urlset>
+
