@@ -81,31 +81,94 @@
   }
   </script>
 
-  <!-- Organization JSON‑LD for explicit “site name” -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Instagram downloader",
-    "url": "https://www.instadl.org",
-    "logo": "https://www.instadl.org/logo.png"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "url": "https://www.instadl.org/story.html" },
-      { "@type": "ListItem", "position": 2, "url": "https://www.instadl.org/video.html" },
-      { "@type": "ListItem", "position": 3, "url": "https://www.instadl.org/reels.html" },
-      { "@type": "ListItem", "position": 4, "url": "https://www.instadl.org/photo.html" },
-      { "@type": "ListItem", "position": 5, "url": "https://www.instadl.org/igtv.html" },
-      { "@type": "ListItem", "position": 6, "url": "https://www.instadl.org/carousel.html" }
-    ]
-  }
-  </script>
+<!-- Organization JSON‑LD for explicit “site name” -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "InstaDL",
+  "url": "https://www.instadl.org",
+  "logo": "https://www.instadl.org/logo.png",
+  "foundingDate": "2023",
+  "founders": [
+    {
+      "@type": "Person",
+      "name": "InstaDL Team"
+    }
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "help",
+      "url": "https://www.instadl.org/faq.html"
+    }
+  ],
+  "description": "InstaDL is a free, fast, and secure Instagram downloader for videos, Reels, Stories, photos, IGTV and carousels—no watermark or login required."
+}
+</script>
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "InstaDL Main Navigation",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Story Downloader",
+      "item": {
+        "@type": "WebPage",
+        "url": "https://www.instadl.org/story.html"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Video Downloader",
+      "item": {
+        "@type": "WebPage",
+        "url": "https://www.instadl.org/video.html"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Reels Downloader",
+      "item": {
+        "@type": "WebPage",
+        "url": "https://www.instadl.org/reels.html"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Photo Downloader",
+      "item": {
+        "@type": "WebPage",
+        "url": "https://www.instadl.org/photo.html"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "IGTV Downloader",
+      "item": {
+        "@type": "WebPage",
+        "url": "https://www.instadl.org/igtv.html"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "Carousel Downloader",
+      "item": {
+        "@type": "WebPage",
+        "url": "https://www.instadl.org/carousel.html"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
