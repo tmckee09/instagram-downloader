@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Elite Title & Description -->
-  <title>Télécharger vidéos et photos Instagram – InstaDL™</title>
+  <title>Télécharger vidéos et photos Instagram HD – InstaDL™</title>
   <meta
     name="description"
     content="Téléchargez gratuitement des vidéos Instagram, Reels, Stories et photos en ligne avec InstaDL™. Sans filigrane, sans connexion ; téléchargements HD illimités en quelques secondes."
@@ -38,53 +38,77 @@
   </script>
 
   <!-- SEO Meta Tags -->
-  <meta name="robots" content="index, follow" />
-  <meta name="google-adsense-account" content="ca-pub-2035725815108237" />
-  <link rel="icon" href="/favicon.ico" />
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Language" content="fr" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="index, follow" />
+<meta name="google-adsense-account" content="ca-pub-2035725815108237" />
+<link rel="icon" href="/favicon.ico" />
 
-  <!-- Tailwind & AlpineJS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<!-- Elite Title & Description -->
+<title>Télécharger photos & vidéos Instagram en HD – InstaDL™</title>
+<meta
+  name="description"
+  content="Téléchargez gratuitement photos, Reels, Stories et vidéos Instagram en HD sans filigrane ni connexion – InstaDL™. Rapide, illimité, sécurisé."
+/>
+<meta
+  name="keywords"
+  content="télécharger Instagram, téléchargeur Instagram HD, télécharger Reels, télécharger Stories, telechargement InstaDL"
+/>
 
-  <!-- Styles pour animation et position fixe -->
-  <style>
-    html { scroll-behavior: smooth; }
-    body { margin-top: 160px; }
-    .fade-in { animation: fadeIn 1.2s ease-in both; }
-    .slide-up { animation: slideUp 1.2s ease-out both; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .floating-ad { position: fixed; top: 120px; width: 160px; z-index: 50; }
-    .floating-ad-left { left: 10px; }
-    .floating-ad-right { right: 10px; }
-    @media (max-width: 1024px) { .floating-ad { display: none; } }
-  </style>
+<!-- Canonical & Hreflang -->
+<link rel="canonical" href="https://www.instadl.org/fr/" />
+<link rel="alternate" hreflang="fr" href="https://www.instadl.org/fr/" />
+<link rel="alternate" hreflang="en" href="https://www.instadl.org/" />
+<link rel="alternate" hreflang="x-default" href="https://www.instadl.org/" />
 
-  <!-- JSON‑LD pour SearchBox & Organization -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Téléchargeur Instagram",
-    "url": "https://www.instadl.org/fr/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.instadl.org/fr/",
-      "query-input": "required name=search_term_string"
-    }
+<!-- Tailwind & AlpineJS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<!-- Styles for fixed bars & animations -->
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin-top: 160px; }
+  .fade-in { animation: fadeIn 1.2s ease-in both; }
+  .slide-up { animation: slideUp 1.2s ease-out both; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .floating-ad { position: fixed; top: 120px; width: 160px; z-index: 50; }
+  .floating-ad-left { left: 10px; }
+  .floating-ad-right { right: 10px; }
+  @media (max-width: 1024px) { .floating-ad { display: none; } }
+</style>
+
+<!-- JSON-LD: Site SearchBox -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Téléchargeur Instagram",
+  "url": "https://www.instadl.org/fr/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.instadl.org/fr/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
   }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Téléchargeur Instagram",
-    "url": "https://www.instadl.org/fr/",
-    "logo": "https://www.instadl.org/logo.png"
-  }
-  </script>
-</head>
-<body class="bg-gray-100 text-gray-800">
+}
+</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Téléchargeur Instagram",
+  "url": "https://www.instadl.org/fr/",
+  "logo": "https://www.instadl.org/logo.png",
+  "description": "InstaDL™ : téléchargeur Instagram gratuit pour photos, vidéos, Reels, Stories et IGTV en HD, sans filigrane ni connexion.",
+  "sameAs": [
+    "https://twitter.com/instadl_org"
+  ]
+}
+</script>
 
   <!-- Floating Side Ads -->
   <div class="floating-ad floating-ad-left">
