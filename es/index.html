@@ -35,7 +35,8 @@
     gtag('config', 'G-01PYD112H4');
   </script>
 
-  <!-- SEO Meta Tags -->
+    <!-- SEO Meta Tags -->
+  <meta http-equiv="Content-Language" content="es" />
   <meta name="robots" content="index, follow" />
   <meta name="google-adsense-account" content="ca-pub-2035725815108237" />
   <link rel="icon" href="/favicon.ico" />
@@ -44,7 +45,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-  <!-- Add this style block to push content below fixed bars and enable animations -->
+  <!-- Push content below fixed bars & enable animations -->
   <style>
     html { scroll-behavior: smooth; }
     body { margin-top: 160px; }
@@ -58,7 +59,16 @@
     @media (max-width: 1024px) { .floating-ad { display: none; } }
   </style>
 
-  <!-- Sitelinks SearchBox & Navigation JSON‑LD -->
+  <!-- Language & Canonical/Hreflang -->
+  <link rel="canonical" href="https://www.instadl.org/es/" />
+  <link rel="alternate" hreflang="es" href="https://www.instadl.org/es/" />
+  <link rel="alternate" hreflang="en" href="https://www.instadl.org/" />
+
+  <!-- Open-Graph Locale -->
+  <meta property="og:locale"      content="es_ES" />
+  <meta property="og:site_name"   content="Descargador de Instagram" />
+
+  <!-- Sitelinks SearchBox & Navigation JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,14 +83,25 @@
   }
   </script>
 
-  <!-- Organization JSON‑LD for explicit “site name” -->
+  <!-- Organization JSON-LD for explicit “site name” -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Descargador de Instagram",
     "url": "https://www.instadl.org/es/",
-    "logo": "https://www.instadl.org/logo.png"
+    "logo": "https://www.instadl.org/logo.png",
+    "sameAs": [
+      "https://twitter.com/instadl_org",
+      "https://www.facebook.com/instadl.org"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://www.instadl.org/es/faq.html"
+      }
+    ]
   }
   </script>
 </head>
