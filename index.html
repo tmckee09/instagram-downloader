@@ -38,11 +38,24 @@
 <meta property="og:image"       content="https://www.instadl.org/og_image.png" />
 <meta property="og:url"         content="https://www.instadl.org/" />
   
-  <!-- ✅ Font -->
-  <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
+  <!-- Preconnect & Preload for your ✅ Font (non-blocking CSS load) -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/fast">
+  <link
+    href="https://fonts.cdnfonts.com/css/fast"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
+  </noscript>
 
-  <!-- ✅ Google AdSense Site-Wide Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237" crossorigin="anonymous"></script>
+  <!-- ✅ Google AdSense Site-Wide Script (already async) -->
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2035725815108237"
+    crossorigin="anonymous">
+  </script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01PYD112H4"></script>
