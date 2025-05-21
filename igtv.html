@@ -132,15 +132,21 @@
   </div>
 </nav>
 
-<!-- 💡 Floating Feature Bar -->
-<div class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/20 backdrop-blur-md py-3 px-4 flex flex-wrap justify-center gap-4 text-white text-sm font-medium shadow-lg rounded-md">
-  <a href="/" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Video</a>
-  <a href="/photo.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Photo</a>
-  <a href="/reels.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Reels</a>
-  <a href="/story.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Story</a>
-  <a href="/igtv.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-yellow-300 font-semibold hover:bg-white/30 transition">IGTV</a>
-  <a href="/carousel.html" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition">Carousel</a>
-</div>
+<!-- 🌟 Primary Navigation (for Google sitelinks) -->
+<nav
+  aria-label="Primary Navigation"
+  class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl
+         bg-white/20 backdrop-blur-md shadow-xl rounded-md"
+>
+  <ul class="flex flex-wrap justify-center gap-4 py-3 px-4 text-white text-sm font-medium">
+    <li><a href="/"             class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition">Video</a></li>
+    <li><a href="/photo.html"   class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition">Photo</a></li>
+    <li><a href="/reels.html"   class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition">Reels</a></li>
+    <li><a href="/story.html"   class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition">Story</a></li>
+    <li><a href="/igtv.html"    class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition font-semibold text-yellow-300 bg-white/20">IGTV</a></li>
+    <li><a href="/carousel.html" class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition">Carousel</a></li>
+  </ul>
+</nav>
   
   <!-- Hero Section -->
   <section id="top" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] pt-40 pb-20 px-6 text-white shadow-xl fade-in">
