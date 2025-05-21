@@ -2,6 +2,7 @@
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
                       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
@@ -10,41 +11,57 @@
     <loc>https://www.instadl.org/</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/" />
   </url>
   <url>
     <loc>https://www.instadl.org/photo.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/photo.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/photo.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/reels.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/reels.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/reels.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/story.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/story.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/story.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/igtv.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/igtv.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/igtv.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/carousel.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/carousel.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/carousel.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/faq.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/faq.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/download-story-no-login.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/download-story-no-login.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/download-story-no-login.html" />
   </url>
 
   <!-- Spanish pages -->
@@ -52,41 +69,57 @@
     <loc>https://www.instadl.org/es/</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/" />  
   </url>
   <url>
     <loc>https://www.instadl.org/es/photo.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/photo.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/photo.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/es/reels.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/reels.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/reels.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/es/story.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/story.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/story.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/es/igtv.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/igtv.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/igtv.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/es/carousel.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/carousel.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/carousel.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/es/faq.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/faq.html" />
   </url>
   <url>
     <loc>https://www.instadl.org/es/download-story-no-login.html</loc>
     <lastmod>2025-04-24</lastmod>
     <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/download-story-no-login.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/download-story-no-login.html" />
   </url>
 
   <!-- Italian page -->
@@ -94,7 +127,9 @@
     <loc>https://www.instadl.org/it.html</loc>
     <lastmod>2025-05-14</lastmod>
     <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="it-IT" href="https://www.instadl.org/it.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.instadl.org/" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.instadl.org/es/" />
   </url>
 
 </urlset>
-
