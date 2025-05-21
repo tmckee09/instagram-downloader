@@ -2,6 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
+  <!-- 🌟 Preconnect & Preload Critical Assets -->
+  <!-- Preconnect to your font host for faster handshake -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+  
+  <!-- Preload your font stylesheet as a style asset -->
+  <link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/fast">
+  
+  <!-- Load CSS non-blocking, with a print-media fallback -->
+  <link
+    href="https://fonts.cdnfonts.com/css/fast"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet">
+  </noscript>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Elite SEO Title & Description -->
