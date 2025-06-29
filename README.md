@@ -1,8 +1,8 @@
-Welcome to the TikTok Downloader project. Whether you're a seasoned dev or just here to vibe code on weekends - you're in the right place. 
+Welcome to the Multi-platform Downloader project. Whether you're a seasoned dev or just here to vibe code on weekends - you're in the right place. 
 Here's how to get started:
 
 __🔒 Permissions & Rules__
-- Repo is under the MIT License (See GitHub -> Repository -> MIT License)
+- Repo will be under the MIT License (See GitHub -> Repository -> MIT License)
 - Only approved collaborators can push directly to main
 - Keep .env keys private — don’t commit them!
 - (.env files store environment variables - usually API Keys, tokens, or config values your app needs to work, but that shouldn’t be exposed publicly)
@@ -15,6 +15,8 @@ If you push API Keys to GitHub:
 
 - They're visible to the public if the repo is public
 - Bots can steal and misuse them
+
+(^ This will make more sense soon)
 
   __Step 1: Download Git and Node.js__
   
