@@ -1,10 +1,5 @@
-// api/download2.js  – TikTok downloader proxy for RapidAPI (with debug)
-
-// ---------------------------------------------------
-// HOW TO REMOVE DEBUG LATER
-//   1. Delete the console.log lines once everything works.
-//   2. Keep only the mapping you need for download_url.
-// ---------------------------------------------------
+// api/download2.js  – TikTok downloader proxy for RapidAPI (hard‑coded key)
+// NOTE: Embedding keys in code is not recommended for production.
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -24,13 +19,12 @@ export default async function handler(req, res) {
     const response = await fetch(apiURL, {
       method: 'GET',
       headers: {
-        'x-rapidapi-key': process.env.RAPID_TT_KEY,
+        'x-rapidapi-key': 'b31dd2def0mshb0dafdf5939b1acp10ea7djsnc407d4d845fa', // ← updated key
         'x-rapidapi-host': 'tiktok-video-downloader-api.p.rapidapi.com',
       },
     });
 
     // ─── Debug logs ─────────────────────────────────────────────
-    console.log('ENV KEY present?', !!process.env.RAPID_TT_KEY);
     console.log('RapidAPI status', response.status);
     // ────────────────────────────────────────────────────────────
 
@@ -41,15 +35,12 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-
-    // More debug: view first part of payload (avoid huge logs)
     console.log('RapidAPI payload', JSON.stringify(data).slice(0, 400));
 
-    // Map the actual downloadable URL — adjust keys based on real response
     const downloadUrl =
-      data?.result?.nowatermark || // many providers use this
-      data?.video ||               // fallback 1
-      data?.url   ||               // fallback 2
+      data?.result?.nowatermark ||
+      data?.video ||
+      data?.url ||
       '';
 
     return res.status(200).json({
