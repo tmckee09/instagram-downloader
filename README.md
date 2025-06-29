@@ -72,9 +72,8 @@ npx live-server
 ```
 It will ask you to Confirm, enter 'Y'
 
+# If PowerShell blocks the script, run 
 ```bash
-If PowerShell blocks the script, run 
-
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser once.
 ```
 Now, you can open your browser and visit:
