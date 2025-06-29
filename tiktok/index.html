@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/fast">
+  <link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.cdnfonts.com/css/fast" rel="stylesheet"></noscript>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>TikTok Video Downloader – Save TikToks in HD No Watermark</title>
+  <meta name="description" content="Download TikTok videos in HD without watermark. Free, fast, no login. Works on all devices. Paste a TikTok link and save instantly." />
+  <meta name="keywords" content="tiktok downloader, tiktok video download, download tiktok no watermark, save tiktok, free tiktok downloader" />
+  <link rel="canonical" href="https://www.instadl.org/tiktok.html" />
+
+  <script type="application/ld+json">
+  { "@context":"https://schema.org","@type":"WebSite","url":"https://www.instadl.org/","potentialAction":{ "@type":"SearchAction","target":"https://www.instadl.org/?q={search_term_string}","query-input":"required name=search_term_string"} }
+  </script>
+  <script type="application/ld+json">
+  { "@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"/"},{"@type":"ListItem","position":2,"url":"/photo.html"},{"@type":"ListItem","position":3,"url":"/reels.html"},{"@type":"ListItem","position":4,"url":"/story.html"},{"@type":"ListItem","position":5,"url":"/igtv.html"},{"@type":"ListItem","position":6,"url":"/carousel.html"},{"@type":"ListItem","position":7,"url":"/tiktok.html"}] }
+  </script>
+
+  <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-2035725815108237" />
+  <link rel="icon" href="/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #000; color: #fff; }
+    .fade-in { animation: fadeIn 1.2s ease-in both; }
+    .slide-up { animation: slideUp 1.2s ease-out both; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    .tiktok-accent { background: linear-gradient(to right, #25F4EE, #FE2C55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+<nav class="absolute top-0 left-0 right-0 z-50 bg-black shadow-sm px-6 py-4 flex justify-between items-center">
+  <div class="flex items-center gap-2">
+    <img src="/logo.png" alt="InstaDL logo" class="h-6 w-auto" />
+  </div>
+  <div class="flex gap-6 text-sm text-white/80">
+    <a href="/faq.html" class="hover:text-pink-500">FAQ</a>
+    <a href="#" class="hover:text-pink-500">EN ▼</a>
+  </div>
+</nav>
+
+<nav aria-label="Primary Navigation" class="absolute top-[64px] left-0 right-0 z-40 mx-auto max-w-5xl bg-white/10 backdrop-blur-md shadow-xl rounded-md">
+  <ul class="flex flex-wrap justify-center gap-4 py-3 px-4 text-white text-sm font-medium">
+    <li><a href="/" class="px-3 py-1 rounded-md hover:bg-white/20 transition">Video</a></li>
+    <li><a href="/photo.html" class="px-3 py-1 rounded-md hover:bg-white/20 transition">Photo</a></li>
+    <li><a href="/reels.html" class="px-3 py-1 rounded-md hover:bg-white/20 transition">Reels</a></li>
+    <li><a href="/story.html" class="px-3 py-1 rounded-md hover:bg-white/20 transition">Story</a></li>
+    <li><a href="/igtv.html" class="px-3 py-1 rounded-md hover:bg-white/20 transition">IGTV</a></li>
+    <li><a href="/carousel.html" class="px-3 py-1 rounded-md hover:bg-white/20 transition">Carousel</a></li>
+    <li><a href="/tiktok.html" class="px-3 py-1 rounded-md bg-white/20 text-pink-400 font-semibold">TikTok</a></li>
+  </ul>
+</nav>
+
+<section id="top" class="pt-40 pb-20 px-6 text-white fade-in" style="background: radial-gradient(ellipse at bottom, #000000 60%, #FE2C55 90%, #25F4EE 100%)">
+  <div class="w-full max-w-2xl mx-auto text-center" x-data="{ loading: false, result: null, error: '' }">
+    <h1 class="text-5xl font-extrabold mb-4 leading-tight tiktok-accent">TikTok Video Downloader</h1>
+    <p class="text-lg mb-6 text-white/90">Save TikToks in crystal-clear HD. No watermark. No login needed.</p>
+    <div class="mt-8 bg-white/10 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
+      <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
+        loading = true;
+        fetch('/api/download', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: $refs.urlInput.value })
+        })
+        .then(res => res.json())
+        .then(data => {
+          result = data;
+          loading = false;
+          error = '';
+          if (data.download_url) {
+            const link = document.createElement('a');
+            link.href = data.download_url;
+            link.download = '';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        })
+        .catch(() => {
+          error = 'Failed to fetch video.';
+          loading = false;
+        });">
+
+        <div class="flex flex-col sm:flex-row w-full gap-2">
+          <input type="text" placeholder="Paste TikTok URL here" x-ref="urlInput" class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm text-black bg-white placeholder-gray-500" />
+          <button type="button" class="bg-white text-gray-800 border border-gray-300 px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition" @click="navigator.clipboard.readText().then(text => $refs.urlInput.value = text)">Paste</button>
+        </div>
+        <button type="submit" class="bg-gradient-to-r from-[#FE2C55] via-[#25F4EE] to-[#FE2C55] text-white shadow-md hover:shadow-xl transition-all duration-300 py-3 px-6 rounded-lg w-full sm:w-auto font-semibold text-sm">Download</button>
+      </form>
+      <div class="mt-4 text-sm text-white/90" x-show="loading">Fetching video link...</div>
+      <template x-if="error"><div class="mt-4 text-red-200 text-sm" x-text="error"></div></template>
+      <template x-if="result && result.download_url">
+        <div class="mt-6 text-center slide-up">
+          <a :href="result.download_url" target="_blank" class="inline-block bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition">Download</a>
+        </div>
+      </template>
+      <p class="mt-8 text-xs text-center text-white/80">Only public TikTok videos are supported. Private or removed content won't work.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-black py-16 px-6 fade-in">
+  <div class="max-w-4xl mx-auto text-center text-white">
+    <h2 class="text-3xl font-bold mb-6">How to Download TikTok Videos in HD</h2>
+    <p class="text-base leading-relaxed mb-6">Using InstaDL’s free TikTok downloader is simple. Paste the link of any public TikTok video, and our tool fetches it in high resolution — no watermark, no login. Whether you’re saving content, collecting clips, or curating memes, we make it instant.</p>
+    <p class="text-base leading-relaxed mb-6">Compatible with iOS, Android, macOS, Windows, and Linux, InstaDL supports all public TikToks. It’s perfect for creators, marketers, and fans alike — free, secure, and lightning fast.</p>
+    <p class="text-base leading-relaxed">Unlike shady tools full of spam and pop-ups, InstaDL gives you a clean, premium download experience. Just paste the link, click download, and go.</p>
+  </div>
+</section>
+
+<footer class="bg-black text-white text-sm py-10 px-6">
+  <div class="max-w-5xl mx-auto text-center space-y-4">
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/" class="hover:text-pink-400">Instagram Video</a>
+      <a href="/photo.html" class="hover:text-pink-400">Instagram Photo</a>
+      <a href="/reels.html" class="hover:text-pink-400">Reels</a>
+      <a href="/story.html" class="hover:text-pink-400">Story</a>
+      <a href="/igtv.html" class="hover:text-pink-400">IGTV</a>
+      <a href="/carousel.html" class="hover:text-pink-400">Carousel</a>
+      <a href="/tiktok.html" class="hover:text-cyan-400">TikTok Downloader</a>
+      <a href="/privacy.html" class="hover:text-gray-300">Privacy</a>
+      <a href="/terms-of-services.html" class="hover:text-gray-300">Terms</a>
+    </div>
+    <div class="mt-4">© 2025 InstaDL. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
