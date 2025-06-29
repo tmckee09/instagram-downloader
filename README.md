@@ -73,6 +73,11 @@ npx live-server
 ```
 It will ask you to Confirm, enter 'Y'
 
+```bash
+If PowerShell blocks the script, run 
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser once.
+```
 Now, you can open your browser and visit:
 
 - `http://127.0.0.1:8080/` – Instagram Downloader  
