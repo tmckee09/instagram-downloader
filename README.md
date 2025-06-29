@@ -1,4 +1,4 @@
-# Multi-platform Downloader (Instagram + TikTok)
+# Multi-platform Downloader (Instagram + TikTok + more)
 
 Welcome to the **Multi-platform Downloader** project (Instagram + TikTok + streaming, etc).  
 Whether you're a seasoned dev or just here to vibe code on weekends — you're in the right place.
