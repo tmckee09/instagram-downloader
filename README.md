@@ -78,7 +78,7 @@ It will ask you to Confirm, enter 'Y'
 ```bash
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser once.
 ```
-Now, you can open your browser and visit:
+# Now, you can open your browser and visit:
 
 - `http://127.0.0.1:8080/` – Instagram Downloader  
 - `http://127.0.0.1:8080/tiktok/index.html` – TikTok Downloader  
