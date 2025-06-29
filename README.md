@@ -1,78 +1,150 @@
-Welcome to the Multi-platform Downloader project. Whether you're a seasoned dev or just here to vibe code on weekends - you're in the right place. 
-Here's how to get started:
+# Multi-platform Downloader (Instagram + TikTok)
 
-__🔒 Permissions & Rules__
-- Repo will be under the MIT License (See GitHub -> Repository -> MIT License)
-- Only approved collaborators can push directly to main
-- Keep .env keys private — don’t commit them!
-- (.env files store environment variables - usually API Keys, tokens, or config values your app needs to work, but that shouldn’t be exposed publicly)
+Welcome to the **Multi-platform Downloader** project (Instagram + TikTok + streaming, etc).  
+Whether you're a seasoned dev or just here to vibe code on weekends — you're in the right place.
 
-__🚫 Never Do This:__
+---
 
-"const apiKey = "my-secret-api-key";"
+## 🔒 Permissions & Rules
 
-If you push API Keys to GitHub:
+- Repo is published under the **MIT License** (see `LICENSE`)  
+- Only approved collaborators can push directly to **main**  
+- **Never commit `.env` files** – your API keys must stay private  
+- All PRs must pass **prettier** + **eslint** check before merge
 
-- They're visible to the public if the repo is public
-- Bots can steal and misuse them
+---
 
-(^ This will make more sense soon)
+## 🚫 Never Do This
 
-  __Step 1: Download Git and Node.js__
-  
-__-- Open Terminal and Copy__
+```js
+// ❌ BAD
+const apiKey = "my-secret-api-key";
+```
 
+If you push keys to GitHub:
+
+- Public repos expose them to the entire internet  
+- Bots scrape and abuse them in under 5 minutes  
+- Your API usage will spike and possibly cost you money  
+
+---
+
+## ✅ Step 1: Install Git & Node.js (first time only)
+
+### Windows (PowerShell)
+
+```powershell
 winget install --id Git.Git -e
-
-__--Paste in Terminal -> Type 'Y' to Confirm__
-
-__--Then Copy:__ 
-
 winget install --id OpenJS.NodeJS.LTS -e
+```
 
-__-- Paste in Terminal -> Confirm on prompt__
+### macOS
 
-__After this, you're ready to clone the repository to your machine to edit it. Copy and paste this in terminal:__
+Install Homebrew: https://brew.sh  
+Then:
 
-git clone https://github.com/tmckee09/tiktok-dl.git
+```bash
+brew install git node
+```
 
-cd tiktok-dl
+---
 
+## ✅ Step 2: Clone the Repo & Run Locally
+
+```bash
+git clone https://github.com/tmckee09/instagram-downloader.git
+cd instagram-downloader
+
+# Install only a few required deps for API routes
 npm install
+```
 
-npm run dev
+---
 
-__(After, it should say 'Starting' and then you can go to "http://localhost:3000" in your browser to view the site as it's under construction and view changes you are making to the code in real-time before we push it to Vercel to be shown publicly. Vercel is the host - PM on Discord for access)__
+## ✅ Step 3: Preview the Static Frontend
 
-__// if you get a lucide-react error when running the website locally, just copy/paste this in terminal__ 
+This project is mostly pure HTML/JS.
 
-npm install lucide-react
-
-npm install next@latest react@latest react-dom@latest
-
-__//any other error Copy/Paste it into ChatGPT and it will tell you how to resolve it__
-
-- __Need to add breadth to the page now__
-
-  ~~- An area to Paste a TikTok link~~ - expand on this
-  - Add an API from RapidAPI for downloading Tiktoks from the link
-  - Choose the best domain name / potential to piggyback off of already high traffic sites using the same API
-  - Extend the black top portion to the bottom of the page, then white on the bottom for separation of the top half where the downloader is and the bottom half where the information and how it works goes
-  - Black Colors // TikTok themed as much as possible
-  - Modern/Sleek design
-  - SEO wording within the pages to attract lurking Google searchers
-  - Pages, Pages, Pages - as many relatable pages about downloading TikTok videos, etc as we can create to drive the search optimization
+```bash
+# Copy/Paste this into Windows Powershell next:
  
-  __Apps to Access__
- - Github Repository (Need to be added as contributor to see this)
- - Vercel (Website Hosting - Push final code to this FROM GitHub - when you 'commit' on the project it will automatically upload this to the Live site.)
- - Node.js
- - Discord
- - ChatGPT Plus
- - VisualCode for better interface while editing locally
+npx live-server
 
+```
+It will ask you to Confirm, enter 'Y'
 
+Now, you can open your browser and visit:
 
+- `http://127.0.0.1:8080/` – Instagram Downloader  
+- `http://127.0.0.1:8080/tiktok/index.html` – TikTok Downloader  
+
+---
+
+## ✅ Step 4: Run Locally With Vercel - (Access for Vercel backend - PM for details if working on backend)
+
+```bash
+npm install -g vercel
+vercel dev
+```
+
+You can now test routes like:
+- http://localhost:3000/api/download (Instagram)
+- http://localhost:3000/api/download2 (TikTok)
+
+---
+
+## 🔐 Collaborator Access
+
+If you're a new contributor:
+
+- Fork the repo or request write access
+- PM on Discord or in #Ctrl-c-Ctrl-v to get:
+  - ✅ Vercel Team Access
+  - ✅ RapidAPI Credentials
+  - ✅ Preview deploy URL(s)
+
+Check Discord or leave a comment in Issues to coordinate feature drops. Ping if you’re confused — I got you.
+
+---
+
+## 📋 Roadmap
+
+- [x] TikTok API integration (via download2.js)
+- [x] More Services for growth `/tiktok`, `/Youtube`, `/etc`
+- [ ] Different Languages: `/espanol`, `/french`, `/Hindi`
+- [ ] Add SEO-optimized long-tail content
+- [ ] Light/dark theme toggle with Alpine.js + Tailwind
+- [ ] Revision, + pages, + pages, + pages, + SEO
+
+---
+
+## 🧰 Tools Used
+
+| Tool         | Use                                  |
+|--------------|---------------------------------------|
+| GitHub       | Source control + CI                  |
+| Vercel       | Hosting + serverless functions       |
+| RapidAPI     | TikTok & Instagram download APIs     |
+| Node.js      | Backend logic in `/api`              |
+| ChatGPT      | Code pair & assistant                |
+| Discord      | Dev team comms (invite only)         |
+| Tailwind CSS | Frontend utility classes             |
+| Alpine.js    | Lightweight JS interactivity         |
+
+---
+
+## Contributing
+
+Issues & features welcome, make sure to test locally before committing
+
+---
+
+## 📜 License
+
+This project is under the **MIT License**.  
+Use it, remix it, sell it, whatever
+
+---
 
 
 
