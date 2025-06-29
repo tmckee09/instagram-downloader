@@ -1,52 +1,81 @@
-# instagram-downloader
+Welcome to the TikTok Downloader project. Whether you're a seasoned dev or just here to vibe code on weekends - you're in the right place. Here's how to get started:
 
-#######################################
-Next prompt to finish these tasks 
+🔒 Permissions & Rules
 
-"Can you generate:
+Repo is under the MIT License (See GitHub -> Repository -> MIT License)
+Only approved collaborators can push directly to main
+Keep .env keys private — don’t commit them!
+(.env files store environment variables - usually API Keys, tokens, or config values your app needs to work, but that shouldn’t be exposed publicly)
+🚫 Never Do This:
 
-- sitemap.xml + robots.txt
-- Full Schema Markup
-- First 3 Blog Pages
-- Initial backlink strategy + script" #### ~ Add in rest of data below with this prompt ~ ####
-#######################################
+"const apiKey = "my-secret-api-key";"
 
- 1. Add sitemap.xml and robots.txt
-→ Helps Google crawl your entire site faster and more intelligently
+If you push API Keys to GitHub:
 
- 2. On-Page SEO
- -Unique Page Title & Meta Description
- -Relevant, Natural Keyword Density
- -Header Tags (<h1>, <h2>...) Structured Cleanly
- -Alt Tags on All Images
- -Canonical Tags
-But also:
- Add structured data / schema markup
-→ Helps Google understand your page. We should add WebSite and WebPage schema with @type.
+They're visible to the public if the repo is public
 
-3. Content Strategy / Topical Authority
- Launch these as separate subpages (linked in footer/nav):
-/how-to-download-instagram-reels
-/how-to-save-instagram-videos
-/best-instagram-downloader-tools
-/instagram-photo-downloader-guide
-/legal-implications-of-downloading-instagram-media
-These become long-tail tributary pages for your main product.
+Bots can steal and misuse them
 
-4. Backlinks (MOST Important for Ranking High)
-You need to:
- Get at least 10–15 referring domains (websites linking to your site)
-→ We can do outreach, create embeddable tools/widgets, or offer affiliate-style promos
+Step 1: Download Git and Node.js
 
- Submit to directories:
--Product Hunt
--AlternativeTo
--GitHub README (if it’s open source-ish)
--Reddit subreddits like r/webdev or r/InternetIsBeautiful
--Build Quora / Medium / dev.to answers pointing to the tool
-(“What’s the best way to download Instagram reels?” type questions)
+-- Open Terminal and Copy
 
-5. Behavioral Signals Google tracks:
+winget install --id Git.Git -e
+
+--Paste in Terminal -> Type 'Y' to Confirm
+
+--Then Copy:
+
+winget install --id OpenJS.NodeJS.LTS -e
+
+-- Paste in Terminal -> Confirm on prompt
+
+After this, you're ready to clone the repository to your machine to edit it. Copy and paste this in terminal:
+
+git clone https://github.com/tmckee09/tiktok-dl.git
+
+cd tiktok-dl
+
+npm install
+
+npm run dev
+
+(After, it should say 'Starting' and then you can go to "http://localhost:3000" in your browser to view the site as it's under construction and view changes you are making to the code in real-time before we push it to Vercel to be shown publicly. Vercel is the host - PM on Discord for access)
+
+// if you get a lucide-react error when running the website locally, just copy/paste this in terminal
+
+npm install lucide-react
+
+npm install next@latest react@latest react-dom@latest
+
+//any other error Copy/Paste it into ChatGPT and it will tell you how to resolve it
+
+Need to add breadth to the page now
+
+- An area to Paste a TikTok link - expand on this
+
+Add an API from RapidAPI for downloading Tiktoks from the link
+Choose the best domain name / potential to piggyback off of already high traffic sites using the same API
+Extend the black top portion to the bottom of the page, then white on the bottom for separation of the top half where the downloader is and the bottom half where the information and how it works goes
+Black Colors // TikTok themed as much as possible
+Modern/Sleek design
+SEO wording within the pages to attract lurking Google searchers
+Pages, Pages, Pages - as many relatable pages about downloading TikTok videos, etc as we can create to drive the search optimization
+Apps to Access
+
+Github Repository (Need to be added as contributor to see this)
+
+Vercel (Website Hosting - Push final code to this FROM GitHub - when you 'commit' on the project it will automatically upload this to the Live site.)
+
+Node.js
+
+Discord
+
+ChatGPT Plus
+
+VisualCode for better interface while editing locally
+
+Behavioral Signals Google tracks:
 -Time on page
 -Bounce rate
 -Scroll depth
