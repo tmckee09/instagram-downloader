@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -66,7 +66,7 @@
     <div class="mt-8 bg-white/10 backdrop-blur-md rounded-xl shadow-2xl border border-white/30 px-6 py-6">
       <form class="flex flex-col sm:flex-row gap-4" @submit.prevent="
         loading = true;
-        fetch('/api/download', {
+        fetch('/api/download2', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url: $refs.urlInput.value })
