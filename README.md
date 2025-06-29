@@ -54,8 +54,9 @@ brew install git node
 ```bash
 git clone https://github.com/tmckee09/instagram-downloader.git
 cd instagram-downloader
-
+```
 # Install only a few required deps for API routes
+```bash
 npm install
 ```
 
