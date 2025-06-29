@@ -55,7 +55,8 @@ brew install git node
 git clone https://github.com/tmckee09/instagram-downloader.git
 cd instagram-downloader
 ```
-# Install only a few required deps for API routes
+
+Install only a few required deps for API routes
 ```bash
 npm install
 ```
@@ -66,7 +67,7 @@ npm install
 
 This project is mostly pure HTML/JS.
 
-# Copy/Paste this into Windows Powershell next:
+Copy/Paste this into Windows Powershell next:
  ```bash
 npx live-server
 
