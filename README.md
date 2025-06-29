@@ -65,9 +65,8 @@ npm install
 
 This project is mostly pure HTML/JS.
 
-```bash
 # Copy/Paste this into Windows Powershell next:
- 
+ ```bash
 npx live-server
 
 ```
