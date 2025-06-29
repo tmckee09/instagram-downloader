@@ -144,10 +144,6 @@ Issues & features welcome, make sure to test locally before committing
 
 ---
 
-## 📜 License
-
-This project is under the **MIT License**.  
-Use it, remix it, sell it, whatever
 
 ---
 
